@@ -29,6 +29,7 @@ class Followers(models.Model):
         null=True, blank=True, default=None)
     
     when_added = models.DateTimeField(default=datetime.now)
-    
 
-
+    class Meta:
+        db_table = 'Followers'
+        verbose_name = 'FollOOWWWERRS'
