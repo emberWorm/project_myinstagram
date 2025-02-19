@@ -3,5 +3,5 @@ from django.shortcuts import render
 # Create your views here.
 
 def index(request):
-    return render(request, 'generalApp/base_layout.html')
+    return render(request, 'generalApp/profile.html')
 
