@@ -5,7 +5,7 @@ from datetime import datetime
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    image = models.ImageField()
+    image = models.ImageField(blank=True, default='default_photo.jpeg')
     body = models.CharField(max_length=1024) # потом поменяем
     author = models.ForeignKey( # id автора
         User,
