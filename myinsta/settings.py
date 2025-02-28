@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'generalApp',
+    'usersApp',
 ]
 
 MIDDLEWARE = [
@@ -124,8 +125,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static'] 
+
+# не нужен если делать static по приложениям
+# STATICFILES_DIRS = [BASE_DIR / 'static'] 
 # нужен
+
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 # Default primary key field type
