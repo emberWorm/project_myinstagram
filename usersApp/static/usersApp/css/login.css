@@ -39,7 +39,7 @@ body{
 	margin-bottom: 5px;
 }
 
-.wrapper .header .form .input_field .input{
+.wrapper .header .form .input_field .input-b{
 	width: 100%;
 	background: #fafafa;
 	border: 1px solid #efefef;
@@ -49,7 +49,7 @@ body{
 	padding: 10px;
 }
 
-.wrapper .header .form .input_field .input:focus{
+.wrapper .header .form .input_field .input-b:focus{
 	border: 1px solid #b2b2b2;
 }
 

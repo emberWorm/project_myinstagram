@@ -1,25 +1,23 @@
-{% extends 'generalApp/base_layout.html'%}
 
 
-{% block content %}
 <div class="centered-div-forma">
     <h2>Создание публикации</h2>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% for field in form %}
-        <div class="form-group">
+        <!-- {% for field in form %} -->
+        <!-- <div class="form-group"> -->
             <!-- {{ field.label_tag }} -->
-            <div>{{ field }}</div>
+            <!-- <div>{{ field }}</div> -->
             <!-- {% if field.errors %}
                         {% for error in field.errors %}
                             <div class="alert alert-danger">{{ error }}</div>
                         {% endfor %}
                     {% endif %} -->
-        </div>
-        {% endfor %}
+        <!-- </div> -->
+        <!-- {% endfor %} -->
+         {{form}}
         <input type="submit" value="Опубликовать">
         <!-- button???? -->
     </form>
 </div>
 
-{% endblock %}

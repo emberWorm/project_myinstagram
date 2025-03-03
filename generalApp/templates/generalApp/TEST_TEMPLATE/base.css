@@ -1,0 +1,475 @@
+:root {
+    --white: #f7f7f7;
+    --black: #000;
+    --grey: #262626;
+    --light-grey: #a8a8a8;
+    --blue: #0095f6;
+    --link-grey: #e1e0e0e1;
+}
+
+
+
+html,
+body {
+    /* плавная прокрутка  */
+    scroll-behavior: smooth;
+    /* font-family: "Playwrite IT Moderna", serif; */
+    /* Roboto */
+    font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--white);
+    color: var(--black);
+    /* сайт прокручивается только по оси Y */
+    overflow-x: hidden;
+    /* расположение элементов по столбцам */
+    display: flex;
+    /* важно VW для отображения других дивов */
+    width: 100vw;
+    /* уборка полей(margin) которые по полям - они мешают*/
+    margin: 0px;
+}
+
+.sidebar {
+    background-color: var(--white);
+    /* ширина */
+    width: 230px;
+    height: 100vh;
+    /* закрепление дива сайдбар*/
+    position: fixed;
+    /* делаем подвижными объекты и размещаем их по колонкам для сайдбара */
+    /*  */
+    display: flex;
+    flex-direction: column;
+
+    /* Первый элемент прижимается к началу контейнера. 
+    Последний элемент прижимается к концу контейнера.
+    Остальные элементы равномерно распределяются между первым и последним элементом, с одинаковыми промежутками */
+    justify-content: space-between;
+
+    border-right: 1px solid var(--link-grey);
+
+    /* наложение?? */
+    z-index: 1000;
+}
+
+.upper-container {
+    display: flex;
+    /* ставит с левой части дива с начала ос */
+    justify-content: flex-start;
+    /* align-items: center; */
+    /* отступы между дивами в конейнере*/
+    gap: 1rem;
+    /* отстпы блока с контейнерами от краев */
+    padding: 1rem;
+    /* делаем список */
+    flex-direction: column;
+    /*  */
+    /* margin: 10px; */
+    /* padding: 10px; */
+
+}
+
+/* ссылки */
+a {
+    color: var(--black);
+    text-decoration: none;
+}
+
+.logo {
+    width: 150px;
+    padding: 1rem;
+}
+
+
+
+.link {
+    display: flex;
+    align-items: center;
+    /* еще вокруг отступ */
+    /* 0 убрать потом */
+    padding: 0.8rem;
+    /* font-size: 0.8rem; */
+
+
+}
+
+
+.link:hover {
+    background-color: var(--link-grey);
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/* копирка с апера */
+.bottom-container {
+    display: flex;
+    /* ставит с левой части дива с начала ос */
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+    /* отступы между дивами в конейнере*/
+    gap: 1rem;
+    /* отстпы блока с контейнерами от краев */
+    padding: 1rem;
+    /* делаем список */
+    flex-direction: column;
+
+}
+
+.logo2 {
+    display: none;
+}
+
+.bottom-navbar {
+    display: none;
+}
+
+
+.main-container {
+    /* 50 процентов от ширины просмотра окна */
+    width: 80vw;
+    padding: 1rem;
+    /*  */
+    margin-left: auto;
+    /* отображение заблокировано */
+    display: block;
+    /* background-color: #0095f6; */
+    margin-left: 0 auto;
+
+    min-height: 100vh;
+    height: auto;
+    overflow-x: hidden;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.story-post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    padding: 2rem;
+    /* height: 100vh; */
+    width: 100%;
+}
+
+.profile-suggestions {
+    width: 40%;
+}
+
+@media screen and (max-width: 1200px) {
+    .profile-suggestions {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .sidebar {
+        width: 60px;
+    }
+
+    .upper-container {
+        align-items: center;
+    }
+
+    .bottom-container {
+        align-items: center;
+    }
+
+
+    .logo {
+        display: none;
+    }
+
+    .logo2 {
+        display: block;
+        width: 1.7rem;
+    }
+
+    .link a {
+        display: none;
+    }
+
+    .profile-suggestions {
+        display: none;
+    }
+
+    .main-container {
+        width: 90vw;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .sidebar {
+        display: none;
+    }
+
+    .stories-container,
+    .posts-container {
+        width: 90vw !important;
+        padding: 0rem 0rem !important;
+    }
+
+    .bottom-navbar {
+        position: fixed;
+        bottom: 0px;
+        /* left: 0px; */
+
+        width: 100%;
+        padding: 1rem 0rem;
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid var(--link-grey);
+        height: 18px;
+
+        background-color: var(--white);
+
+        z-index: 1000;
+        /* Этот код сделает элемент .element видимым поверх других элементов с меньшим значением z-index. */
+    }
+}
+
+
+/* storyy */
+
+.story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.story p {
+    margin: 0.5rem 0rem;
+    font-size: 0.65rem;
+    text-align: center;
+}
+
+.gradient-border {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at 30% 107%,
+            #fdf497 0%,
+            #fdf497 5%,
+            #fd5949 45%,
+            #d6249f 60%,
+            #285aeb 90%);
+    padding: 4px;
+}
+
+.gradient-border img {
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--white);
+}
+
+.stories-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    /* между кружочками ( GAP - пробел )*/
+    width: 50vw;
+    overflow-x: auto;
+    padding: 0rem 0rem;
+}
+
+/* Разница между justify-content и align-items заключается в том, как они выравнивают элементы внутри контейнера Flexbox:
+
+"Выравнивание содержимого" " justify - оправдывать"
+justify-content:
+Выравнивает элементы по главной оси (обычно по горизонтали).
+
+"Выравнивание элементов"  "align - выравнивать"
+align-items:
+Выравнивает элементы по поперечной оси (обычно по вертикали).
+ */
+
+.posts-container {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    padding: 1rem 0rem;
+
+    /* margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    justify-content: center; */
+}
+
+.post {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 400px;
+}
+
+.post-header {
+    border-top: 1px solid var(--link-grey);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.post-info-flex {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.post-info-flex ul {
+    padding-left: 0.6rem;
+    color: var(--light-grey);
+}
+
+.profile-pic {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    /* сохранение соотношения сторон */
+    object-fit: cover;
+    border: 1px solid var(--link-grey);
+
+}
+
+.post-info-flex p {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.list-time {
+    font-size: 0.7rem;
+    margin: 0;
+}
+
+.post-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.post-icons {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.post-icons-left {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.likes,
+.caption,
+.comments {
+    margin: 0.35rem 0;
+    font-size: 0.8rem;
+}
+
+.comments {
+    color: var(--light-grey);
+}
+
+.post-icon:hover {
+    /* при наведении, прозрачность */
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+
+/* PROFILE SUGGESTIONS */
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    margin-right: 0.75rem;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+}
+
+.profile-info-name {
+    color: var(--light-grey);
+    margin: 0.2rem 0rem;
+}
+
+.switch {
+    color: var(--blue);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.profile-div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0px 20px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.profile-list {
+    font-weight: 400;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 0.75rem;
+    row-gap: 0.35rem;
+    font-size: 0.5rem;
+    padding-left: 0rem;
+    color: var(--light-grey);
+    margin-bottom: 0;
+}
+
+
+.profile-suggestions {
+    padding: 2rem;
+    margin-right: 4rem;
+}
+
+.profile-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0rem;
+}
+
+.switch:hover{
+    cursor: pointer;
+    color: var(--black);
+}

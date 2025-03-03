@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect
 from . import models, forms
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
+@login_required(login_url='users:login')
 def home(request):
-    return render(request, 'generalApp/home.html')
+    all_posts = models.Post.objects.all()
 
+    return render(request, 'generalApp/home.html', {"all_posts":all_posts})
+
+@login_required(login_url='users:login')
 def profile(request):
     context = {
         "post_count":models.Post.objects.count(),
@@ -22,8 +27,9 @@ def insta_post(request, pk):
     }
     return render(request, 'generalApp/post.html', context)
 
+@login_required(login_url='users:login')
 def create_post(request):
-    form = forms.PostCreateForm()# обязательно ли () - ?
+    form = forms.PostCreateForm # обязательно ли () - ?
 
     if request.method == "POST":
         form = forms.PostCreateForm(request.POST,request.FILES) # насколько я помню он славливает ее не сохраняя

