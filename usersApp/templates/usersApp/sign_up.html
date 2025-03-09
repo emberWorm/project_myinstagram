@@ -26,16 +26,18 @@
 					<input type="password" placeholder="Password" class="input">
 				</div> -->
 				
+				{% for filed in reg_form %}
 				<div class="input_field">
-					{{form.username}}
+					{{filed}}
 				</div>
+				{% endfor %}
 				
 				<div class="input_field">
-					{{form.password}}
+					{{profile_form.name}}
 				</div>
+
+				<button type="submit" class="btn">Sign up</button>
 				
-				<!-- <div class="btn"><a href="#">Log In</a></div> -->
-				<input type="submit" value="Log in">
 				</form>
 			</div>
 			<div class="or">
@@ -54,7 +56,7 @@
 			</div>
 		</div>
 		<div class="signup">
-			<p>Don't have an account? <a href="#">Sign up</a></p>
+			<p>Have an account? <a href={% url 'usersApp:log_in' %}>Log in</a></p>
 		</div>
 		<div class="apps">
 			<p>Get the app.</p>

@@ -2,138 +2,140 @@
 
 {% load static %}
 
+{% block extra_styles %}
+
+{% endblock %}
+
 {% block content %}
 
-<div class="main-container">
-
-    <div class="story-post-container">
-        <!-- stories -->
-        <div class="stories-container">
-            <div class="story">
-                <div class="gradient-border">
-                    <img src="{% static 'generalApp/icons/man62.png' %}" alt="">
-                </div>
-                <p>Username</p>
+<div class="story-post-container">
+    <!-- stories -->
+    <div class="stories-container">
+        <div class="story">
+            <div class="gradient-border">
+                <img src="{% static 'generalApp/icons/man62.png' %}" alt="">
             </div>
-            <div class="story">
-                <div class="gradient-border">
-                    <img src="{% static 'generalApp/icons/man62.png' %}" alt="">
-                </div>
-                <p>Username</p>
+            <p>Username</p>
+        </div>
+        <div class="story">
+            <div class="gradient-border">
+                <img src="{% static 'generalApp/icons/man62.png' %}" alt="">
             </div>
-
-
+            <p>Username</p>
         </div>
 
-        <!-- posts -->
-        <div class="posts-container">
-
-            {% for post in all_posts %}
-
-            <div class="post">
-                <div class="post-header">
-                    <div class="post-info-flex">
-                        <img src="{% static 'generalApp/icons/man62.png' %}" alt="Фото профиля" class="profile-pic">
-                        <p>{{ post.author}}</p>
-                        <ul>
-                            <li class="list-time"> 8 hrs</li>
-                        </ul>
-                    </div>
-                    <img class="post-icon" src="{% static 'generalApp/icons/moree.png' %}" style="height: 1.3rem;">
-                </div>
-
-                <img src="{{ post.image.url }}"
-                
-                    alt="Post Image" class="post-img" />
-
-                <div class="post-icons">
-                    <div class="post-icons-left">
-                        <img class="post-icon" src="{% static 'generalApp/icons/heart.png' %}" 
-                        alt="" style="height: 1.4rem;">
-                        <img class="post-icon" src="{% static 'generalApp/icons/chat.png' %}" style="height: 1.5rem" alt="">
-                        <img class="post-icon" src="{% static 'generalApp/icons/direct.png' %}" style="height: 1.4rem;" alt="">
-                    </div>
-                    <img class="post-icon" src="{% static 'generalApp/icons/bookmark.png' %}" style="height: 1.4rem;" alt="">
-                </div>
-                <p class="likes">100 likes</p>
-                <p class="caption">{{ post.body }}</p>
-                <a href="#" class="comments">View all comments</a>
-            </div>
-
-            {% endfor %}
-
-        </div>
 
     </div>
 
+    <!-- posts -->
+    <div class="posts-container">
 
-    <div class="profile-suggestions">
-        <div class="profile-flex">
+        {% for post in all_posts reversed %}
 
-            <div class="profile">
-
-                <img src="{% static 'generalApp/icons/man62.png' %}" alt="Profile Picture" />
-
-                <div class="profile-info">
-
-                    <strong>Username</strong>
-
-                    <span class="profile-info-name">Name</span>
+        <div class="post">
+            <div class="post-header">
+                <div class="post-info-flex">
+                    <img src="{{ post.author.userprofile.avatar.url }}" alt="Фото профиля" class="profile-pic">
+                    <p>{{ post.author}}</p>
+                    <ul>
+                        <li class="list-time"> 8 hrs</li>
+                    </ul>
                 </div>
+                <img class="post-icon" src="{% static 'generalApp/icons/moree.png' %}" style="height: 1.3rem;">
             </div>
-            <div class="switch">Switch</div>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--light-grey)">
-            Suggested For You
-        </p>
-        <div class="profile-flex">
 
-            <div class="profile">
+            <img src="{{ post.image.url }}" alt="Post Image" class="post-img" />
 
-                <img src="{% static 'generalApp/icons/man62.png' %}" alt="Profile Picture" />
-
-                <div class="profile-info">
-
-                    <strong>Username</strong>
-
-                    <span class="profile-info-name">Name</span>
+            <div class="post-icons">
+                <div class="post-icons-left">
+                    <img class="post-icon" src="{% static 'generalApp/icons/heart.png' %}" alt=""
+                        style="height: 1.4rem;">
+                    <img class="post-icon" src="{% static 'generalApp/icons/chat.png' %}" style="height: 1.5rem" alt="">
+                    <img class="post-icon" src="{% static 'generalApp/icons/direct.png' %}" style="height: 1.4rem;"
+                        alt="">
                 </div>
+                <img class="post-icon" src="{% static 'generalApp/icons/bookmark.png' %}" style="height: 1.4rem;"
+                    alt="">
             </div>
-            <div class="switch">Follow</div>
+            <p class="likes">100 likes</p>
+            <p class="caption">{{ post.body }}</p>
+            <a href="#" class="comments">View all comments</a>
         </div>
-        <div class="profile-flex">
 
-            <div class="profile">
-
-                <img src="{% static 'generalApp/icons/man62.png' %}" alt="Profile Picture" />
-
-                <div class="profile-info">
-
-                    <strong>Username</strong>
-
-                    <span class="profile-info-name">Name</span>
-                </div>
-            </div>
-            <div class="switch">Follow</div>
-        </div>
-        <ul class="profile-list">
-            <li>About</li>
-            <li>Help</li>
-            <li>Press</li>
-            <li>API</li>
-            <li>Jobs</li>
-            <li>Privacy</li>
-            <li>Terms</li>
-            <li>Locations</li>
-            <li>Language</li>
-            <li>English</li>
-        </ul>
-        <p style="font-size: 0.5rem; color: var(--light-grey)">
-            Meta Verified © 2023 INSTAGRAM FROM META
-        </p>
+        {% endfor %}
 
     </div>
 
 </div>
+
+
+<div class="profile-suggestions">
+    <div class="profile-flex">
+
+        <div class="profile-rec">
+
+            <img src="{{ user.userprofile.avatar.url }}" alt="Profile Picture" />
+
+            <div class="profile-rec-info">
+
+                <strong>{{user.username}}</strong>
+
+                <span class="profile-rec-info-name">{{ user.userprofile.name }}</span>
+            </div>
+        </div>
+        <div class="switch">Switch</div>
+    </div>
+    <p style="font-size: 0.8rem; color: var(--light-grey)">
+        Suggested For You
+    </p>
+    <div class="profile-flex">
+
+        <div class="profile-rec">
+
+            <img src="{% static 'generalApp/icons/man62.png' %}" alt="Profile Picture" />
+
+            <div class="profile-rec-info">
+
+                <strong>Username</strong>
+
+                <span class="profile-rec-info-name">Name</span>
+            </div>
+        </div>
+        <div class="switch">Follow</div>
+    </div>
+    <div class="profile-flex">
+
+        <div class="profile-rec">
+
+            <img src="{% static 'generalApp/icons/man62.png' %}" alt="Profile Picture" />
+
+            <div class="profile-rec-info">
+
+                <strong>Username</strong>
+
+                <span class="profile-rec-info-name">Name</span>
+            </div>
+        </div>
+        <div class="switch">Follow</div>
+    </div>
+    <ul class="profile-rec-list">
+        <li>About</li>
+        <li>Help</li>
+        <li>Press</li>
+        <li>API</li>
+        <li>Jobs</li>
+        <li>Privacy</li>
+        <li>Terms</li>
+        <li>Locations</li>
+        <li>Language</li>
+        <li>English</li>
+    </ul>
+    <p style="font-size: 0.5rem; color: var(--light-grey)">
+        Meta Verified © 2023 INSTAGRAM FROM META
+    </p>
+
+</div>
+
+
 
 {% endblock %}

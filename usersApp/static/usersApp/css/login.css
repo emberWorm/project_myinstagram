@@ -39,7 +39,7 @@ body{
 	margin-bottom: 5px;
 }
 
-.wrapper .header .form .input_field .input-b{
+.wrapper .header .form .input_field .input{
 	width: 100%;
 	background: #fafafa;
 	border: 1px solid #efefef;
@@ -49,8 +49,17 @@ body{
 	padding: 10px;
 }
 
-.wrapper .header .form .input_field .input-b:focus{
+.wrapper .header .form .input_field .input:focus{
 	border: 1px solid #b2b2b2;
+}
+
+.input-bebra{
+	background-color: #077ce9;
+}
+.input-bebra input{
+	border-radius: 3px;
+	color: brown;
+
 }
 
 .wrapper .header .form .btn{
@@ -60,10 +69,18 @@ body{
     border-radius: 4px;
     text-align: center;
     padding: 5px;
+	color: #fff;
+	width: 100%;
+}
+
+.wrapper .header .form .btn:hover{
+	background-color: #077ce9;
+	cursor: pointer;
+	
 }
 
 .wrapper .header .form .btn a{
-	color: #fff;
+	/* color: #fff; */
 	display: block;
 }
 

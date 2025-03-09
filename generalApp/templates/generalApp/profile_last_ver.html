@@ -1,0 +1,109 @@
+{% extends 'generalApp/base_layout.html'%}
+{% load static %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href={% static "generalApp/css/dont_touch_profile.css" %}>
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600"> -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"> -->
+{% endblock %}
+
+
+{% block content %}
+<div class="body-profile">
+
+    <header>
+        <div class="container">
+
+            <div class="profile">
+
+                <div class="profile-image">
+
+                    <img src="{{ profile.avatar.url }}"
+                        alt="">
+
+                </div>
+
+                <div class="profile-user-settings">
+
+                    <h1 class="profile-user-name">{{ user.username }}</h1>
+
+                    <button class="btn profile-edit-btn">Edit Profile</button>
+
+                    <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
+                            aria-hidden="true"></i></button>
+
+                </div>
+
+                <div class="profile-stats">
+
+                    <ul>
+                        <li><span class="profile-stat-count">{{ post_count }}</span> posts</li>
+                        <li><span class="profile-stat-count">188</span> followers</li>
+                        <li><span class="profile-stat-count">206</span> following</li>
+                    </ul>
+
+                </div>
+
+                <div class="profile-bio">
+
+                    <p><span class="profile-real-name">{{profile.name}}</span> 
+                        {{profile.bio}}📷✈️🏕️</p>
+
+                </div>
+
+            </div>
+            <!-- End of profile section -->
+
+        </div>
+        <!-- End of container -->
+
+    </header>
+
+    <main>
+
+        <div class="container">
+            {% if posts_user %}
+            <div class="gallery">
+                {% for post in posts_user reversed %}
+                <div class="gallery-item" tabindex="0">
+                    
+                    <a href="{% url 'generalApp:view_post' post.pk %}">
+
+                    <img src="{{ post.image.url }}" class="gallery-image" alt="">
+
+                        <div class="gallery-item-info">
+
+                            <ul>
+                                <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i
+                                        class="fas fa-heart" aria-hidden="true"></i> 56</li>
+                                <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i
+                                        class="fas fa-comment" aria-hidden="true"></i> 2</li>
+                            </ul>
+
+
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="no-post">
+                <img src="{% static 'generalApp/icons/camera.png' %}" alt="">
+                <h1>No Posts Yet</h1>
+            </div>
+
+            {% endif %}
+            <!-- End of gallery -->
+
+            <!-- <div class="loader"></div> -->
+
+        </div>
+        <!-- End of container -->
+
+    </main>
+</div>
+
+{% endblock %}

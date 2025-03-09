@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 
     <link rel="stylesheet" href={% static "generalApp/css/base.css" %}>
-    
+
     {% block extra_styles %}{% endblock %}
-    <!-- <script src="script.js" defer></script> -->
+    <script src={% static "generalApp/js/base.js" %} defer></script>
 </head>
 
 <body>
@@ -30,20 +30,22 @@
 
             <div class="link-flex">
 
-                <!-- <a href=""> -->
-                <div class="link" href={% url 'generalApp:url_home' %}>
+                <div class="link-button" data-url="{% url 'generalApp:url_home' %}">
 
                     <img src="{% if request.path == '/' %}
                         {% static 'generalApp/icons/home_black.png' %}
                         {% else %}
                         {% static 'generalApp/icons/home_white.png'  %}
-                        {% endif %}" style="height: 2rem; margin-right: 0.6rem;">
+                        {% endif %}" 
+                        style="height: 2rem; margin-right: 0.6rem;">
 
                     <!-- <img  
                         src="home_white.png" 
                         style="height: 2rem; margin-right: 0.6rem;"> -->
 
-                    <a href={% url 'generalApp:url_home' %}>Home</a>
+                    <a {% if request.path == '/' %} class="bold"{% else %}{% endif %}>Home</a>
+
+                    <!-- <a href={% url 'generalApp:url_home' %}>Home</a> -->
                 </div>
 
                 <!-- </a> -->
@@ -53,45 +55,56 @@
 
                     <img src="{% static 'generalApp/icons/search.png' %}" style="height: 2rem; margin-right: 0.6rem;">
 
-                    <a href="#" id="text">Search</a>
+                    <a href="#">Search</a>
                 </div>
 
                 <div class="link">
 
                     <img src="{% static 'generalApp/icons/compass.png' %}" style="height: 2rem; margin-right: 0.6rem;">
 
-                    <a href="#" id="text">Explore</a>
+                    <a href="#">Explore</a>
                 </div>
 
                 <div class="link">
 
                     <img src="{% static 'generalApp/icons/reels.png' %}"
                         style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
-                    <a href="#" id="text">Reels</a>
+                    <a href="#">Reels</a>
                 </div>
 
                 <div class="link">
                     <img src="{% static 'generalApp/icons/direct.png' %}"
                         style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
-                    <a href="#" id="text">Messages</a>
+                    <a href="#">Messages</a>
                 </div>
 
                 <div class="link">
                     <img src="{% static 'generalApp/icons/heart.png' %}"
                         style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
-                    <a href="#" id="text">Notifications</a>
+                    <a href="#">Notifications</a>
                 </div>
 
-                <div class="link">
-                    <img src="{% static 'generalApp/icons/plus.png' %}" 
-                    style="height: 1.6rem; margin-right: 0.7rem; margin-left: 0.4rem;">
-                    <a href={% url 'generalApp:url_create_post' %} id="text">Create</a>
+                <div class="link-button" data-url="{% url 'generalApp:url_create_post' %}">
+                    <img src="{% if request.path == '/create/' %}
+                        {% static 'generalApp/icons/plus_black.png' %}
+                        {% else %}
+                        {% static 'generalApp/icons/plus.png'  %}
+                        {% endif %}" style="height: 1.6rem; margin-right: 0.7rem; margin-left: 0.4rem;">
+
+                    <a {% if request.path == '/create/' %} class="bold"{% else %}{% endif %}>Create</a>
+                    <!-- <a href={% url 'generalApp:url_create_post' %}>Create</a> -->
                 </div>
 
-                <div class="link">
-                    <img src="{% static 'generalApp/icons/user.png' %}" 
+                <div class="link-button" data-url="{% url 'generalApp:url_profile'%}">
+
+                    <img src="{% if request.path == '/profile/' %}
+                    {% static 'generalApp/icons/user_black.png' %}
+                    {% else %}
+                    {% static 'generalApp/icons/user.png'  %}
+                    {% endif %}" 
                     style="height: 1.6rem; margin-right: 0.7rem; margin-left: 0.4rem">
-                    <a href="#" id="text">Profile</a>
+
+                    <a {% if request.path == '/profile/' %} class="bold"{% else %}{% endif %}>Profile</a>
                 </div>
 
             </div>
@@ -102,47 +115,50 @@
         <div class="bottom-container">
             <div class="link">
                 <img src="{% static 'generalApp/icons/more_black.png' %}" style="height: 1.6rem; margin-right: 0.6rem;">
-                <a href="#" id="text">More</a>
+                <a href="#">More</a>
             </div>
         </div>
 
     </div>
 
-    {% block content %}
-    {% endblock %}
+    <div class="main-container">
+        {% block content %}
+
+        {% endblock %}
+    </div>
 
 
     <div class="bottom-navbar">
 
         <div class="link">
             <img src="home_white.png" style="height: 2rem; margin-right: 0.6rem;">
-            <a href="#" id="text">Home</a>
+            <a href="#">Home</a>
         </div>
 
 
         <div class="link">
             <img src="compass.png" style="height: 2rem; margin-right: 0.6rem;">
-            <a href="#" id="text">Explore</a>
+            <a href="#">Explore</a>
         </div>
 
         <div class="link">
             <img src="direct.png" style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
-            <a href="#" id="text">Messages</a>
+            <a href="#">Messages</a>
         </div>
 
         <div class="link">
             <img src="plus.png" style="height: 1.6rem; margin-right: 0.7rem; margin-left: 0.4rem;">
-            <a href="#" id="text">Create</a>
+            <a href="#">Create</a>
         </div>
 
         <div class="link">
             <img src="heart.png" style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
-            <a href="#" id="text">Notifications</a>
+            <a href="#">Notifications</a>
         </div>
 
         <div class="link">
             <img src="user.png" style="height: 1.6rem; margin-right: 0.7rem; margin-left: 0.4rem">
-            <a href="#" id="text">Profile</a>
+            <a href="#">Profile</a>
         </div>
 
     </div>
