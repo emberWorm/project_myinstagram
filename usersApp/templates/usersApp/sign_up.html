@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Instagram Login Page</title>
+	<title>Instagram Sign up</title>
 	<link rel="stylesheet" href={% static 'usersApp/css/login.css'%}>
+	<!-- icon -->
+    <link rel="icon" type="png" href="{% static 'generalApp/icons/inst_logo_plast_3D.png' %}">
 </head>
 <body>
 
@@ -15,7 +17,7 @@
 				<img src="{% static 'usersApp/icons/instagram.png' %}" alt="instagram" style="width: 175px;">
 			</div>
 			<div class="form">
-				
+				<div class="sign-title">Sign up to see photos and videos from your friends. シ</div>
 				<form action="" method="post">
 					{%csrf_token%}
 

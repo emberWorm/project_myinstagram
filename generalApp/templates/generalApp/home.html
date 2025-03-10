@@ -35,8 +35,11 @@
         <div class="post">
             <div class="post-header">
                 <div class="post-info-flex">
-                    <img src="{{ post.author.userprofile.avatar.url }}" alt="Фото профиля" class="profile-pic">
-                    <p>{{ post.author}}</p>
+
+                    <img src="{{ post.author.userprofile.avatar.url }}" alt="Фото профиля" class="profile-pic"
+                        data-url="{% url 'usersApp:user_prof' post.author.username %}">
+
+                    <p class="obj-click" data-url="{% url 'usersApp:user_prof' post.author.username %}">{{ post.author}}</p>
                     <ul>
                         <li class="list-time"> 8 hrs</li>
                     </ul>
@@ -59,7 +62,7 @@
             </div>
             <p class="likes">100 likes</p>
             <p class="caption">{{ post.body }}</p>
-            <a href="#" class="comments">View all comments</a>
+            <a href="{% url 'generalApp:view_post' post.pk %}" class="comments">View all comments</a>
         </div>
 
         {% endfor %}
@@ -74,11 +77,11 @@
 
         <div class="profile-rec">
 
-            <img src="{{ user.userprofile.avatar.url }}" alt="Profile Picture" />
+            <img class="obj-click" data-url="{% url 'usersApp:user_prof' request.user.username %}" src="{{ user.userprofile.avatar.url }}" alt="Profile Picture" />
 
             <div class="profile-rec-info">
 
-                <strong>{{user.username}}</strong>
+                <strong class="obj-click" data-url="{% url 'usersApp:user_prof' request.user.username %}">{{user.username}}</strong>
 
                 <span class="profile-rec-info-name">{{ user.userprofile.name }}</span>
             </div>

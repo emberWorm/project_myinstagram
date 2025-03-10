@@ -76,7 +76,6 @@ body{
 .wrapper .header .form .btn:hover{
 	background-color: #077ce9;
 	cursor: pointer;
-	
 }
 
 .wrapper .header .form .btn a{
@@ -177,4 +176,15 @@ body{
 
 .footer .copyright{
 	color: #999;	
+}
+
+
+.sign-title{
+	color: #5d6684;
+	font-size: medium;
+	/* font-weight: bold; */
+	text-align: center;
+
+	position: relative;
+	top: -20px;
 }

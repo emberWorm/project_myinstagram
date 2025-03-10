@@ -19,7 +19,7 @@
 
                 <div class="profile-image">
 
-                    <img src="{{ profile.avatar.url }}"
+                    <img src="{{ user.userprofile.avatar.url }}"
                         alt="">
 
                 </div>
@@ -47,8 +47,8 @@
 
                 <div class="profile-bio">
 
-                    <p><span class="profile-real-name">{{profile.name}}</span> 
-                        {{profile.bio}}📷✈️🏕️</p>
+                    <p><span class="profile-real-name">{{user.userprofile.name}}</span> 
+                        {{user.userprofile.bio}}📷✈️🏕️</p>
 
                 </div>
 
@@ -86,16 +86,15 @@
                     </a>
 
                 </div>
+                {% endfor %}
+                {% else %}
+                <div class="no-post">
+                    <img src="{% static 'generalApp/icons/camera.png' %}" alt="">
+                    <h1>No Posts Yet</h1>
+                </div>
+                {% endif %}
 
             </div>
-            {% endfor %}
-            {% else %}
-            <div class="no-post">
-                <img src="{% static 'generalApp/icons/camera.png' %}" alt="">
-                <h1>No Posts Yet</h1>
-            </div>
-
-            {% endif %}
             <!-- End of gallery -->
 
             <!-- <div class="loader"></div> -->

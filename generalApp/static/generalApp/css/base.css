@@ -29,7 +29,7 @@ body {
 }
 
 .sidebar {
-    background-color: var(--white);
+    /* background-color: var(--white); */
     /* ширина */
     width: 230px;
     height: 100vh;
@@ -385,10 +385,12 @@ align-items:
     margin: 0;
 }
 
-/* тыкается на страницу */
+/* тыкается на страницу HOVER*/
 .post-info-flex img:hover,
 .post-info-flex p:hover,
-.list-time:hover{
+.list-time:hover,
+.profile-rec img:hover,
+.profile-rec strong:hover{
     cursor: pointer;
 }
 /*  */
@@ -507,4 +509,28 @@ align-items:
 .switch:hover {
     cursor: pointer;
     color: var(--black);
+}
+
+@media (prefers-color-scheme: dark) {
+    body{
+        /* background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); */
+        /* background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%); */
+        background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+    }
+}
+
+
+.logout-btn{
+    display: none;
+    border: 1px solid #000;
+    border-radius: 10px;
+    text-align: center;
+}
+.logout-btn p{
+    color: brown;
+
+}
+
+.logout-btn.open{
+    display: block;
 }

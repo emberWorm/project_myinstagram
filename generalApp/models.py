@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, blank=True, default='no title')
     image = models.ImageField(
         upload_to="users_posts_images",
         blank=False, # ВОТ ЭТО НАДО
         # default='default_photo.jpeg'
         )
-    body = models.CharField(max_length=1024) # потом поменяем
+    body = models.CharField(max_length=1024, blank=True, default='') # потом поменяем
     author = models.ForeignKey( # id автора
         User,
         related_name='author',
