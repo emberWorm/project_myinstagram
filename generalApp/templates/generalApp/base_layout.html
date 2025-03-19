@@ -11,7 +11,8 @@
 
     <!-- <link href="https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap" rel="stylesheet"> -->
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href={% static "generalApp/css/base.css" %}>
 
@@ -20,124 +21,134 @@
 </head>
 
 <body>
-
-
-
-    <div class="sidebar">
-        <div class="upper-container">
-            <img src="{% static 'generalApp/icons/InstagramLogo.png' %}" class="logo">
-            <img src="{% static 'generalApp/icons/instaa.png' %}" class="logo2">
-
-            <div class="link-flex">
-
-                <div class="link-button" data-url="{% url 'generalApp:url_home' %}">
-
-                    <img src="{% if request.path == '/' %}
-                        {% static 'generalApp/icons/home_black.png' %}
+    <div class="parent-sidebar">
+        <div class="main-sidebar" id="main-sidebar">
+            <div class="upper-container">
+                <img src="{% static 'generalApp/icons/InstagramLogo.png' %}" class="logo">
+                <img src="{% static 'generalApp/icons/instaa.png' %}" class="logo2">
+    
+                <div class="link-flex">
+    
+                    <div class="link-button" data-url="{% url 'generalApp:url_home' %}">
+    
+                        <img id="img-home" src="{% if request.path == '/' %}
+                            {% static 'generalApp/icons/home_black.png' %}
+                            {% else %}
+                            {% static 'generalApp/icons/home_white.png'  %}
+                            {% endif %}" 
+                            style="height: 2rem; margin-right: 0.6rem;">
+    
+                        <!-- <img  
+                            src="home_white.png" 
+                            style="height: 2rem; margin-right: 0.6rem;"> -->
+    
+                        <a {% if request.path == '/' %} class="bold"{% else %}{% endif %}>Home</a>
+    
+                        <!-- <a href={% url 'generalApp:url_home' %}>Home</a> -->
+                    </div>
+    
+                    <!-- </a> -->
+    
+    
+                    <div id="search" class="link">
+    
+                        <img id="img-search" src="{% static 'generalApp/icons/search.png' %}" style="height: 2rem; margin-right: 0.6rem;">
+    
+                        <a href="#">Search</a>
+                    </div>
+    
+                    <div class="link-button" data-url="{% url 'generalApp:explore' %}">
+    
+                        <img id="img-explore" src="{% if request.path == '/explore/' %}
+                            {% static 'generalApp/icons/compass_black.png' %}
+                            {% else %}
+                            {% static 'generalApp/icons/compass.png'  %}
+                            {% endif %}"
+                            style="height: 2rem; margin-right: 0.6rem;">
+    
+                        <a {% if request.path == '/explore/' %} class="bold"{% else %}{% endif %} href="#">Explore</a>
+                    </div>
+    
+                    <div class="link">
+    
+                        <img id="img-reels" src="{% static 'generalApp/icons/reels.png' %}"
+                            style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
+                        <a href="#">Reels</a>
+                    </div>
+    
+                    <div class="link">
+                        <img id="img-direct" src="{% static 'generalApp/icons/direct.png' %}"
+                            style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
+                        <a href="#">Messages</a>
+                    </div>
+    
+                    <div class="link">
+                        <img id="img-heart" src="{% static 'generalApp/icons/heart.png' %}"
+                            style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
+                        <a href="#">Notifications</a>
+                    </div>
+    
+                    <div class="link-button" data-url="{% url 'generalApp:url_create_post' %}">
+                        <img id="img-plus" src="{% if request.path == '/create/' %}
+                            {% static 'generalApp/icons/plus_black.png' %}
+                            {% else %}
+                            {% static 'generalApp/icons/plus.png'  %}
+                            {% endif %}" style="height: 1.6rem; margin-right: 0.7rem; margin-left: 0.4rem;">
+    
+                        <a {% if request.path == '/create/' %} class="bold"{% else %}{% endif %}>Create</a>
+                        <!-- <a href={% url 'generalApp:url_create_post' %}>Create</a> -->
+                    </div>
+    
+                    <div class="link-button" data-url="{% url 'usersApp:user_prof' request.user.username %}">
+    
+                        <img id="img-profile" src="{% if is_current_user %}
+                        {% static 'generalApp/icons/user_black.png' %}
                         {% else %}
-                        {% static 'generalApp/icons/home_white.png'  %}
+                        {% static 'generalApp/icons/user.png'  %}
                         {% endif %}" 
-                        style="height: 2rem; margin-right: 0.6rem;">
-
-                    <!-- <img  
-                        src="home_white.png" 
-                        style="height: 2rem; margin-right: 0.6rem;"> -->
-
-                    <a {% if request.path == '/' %} class="bold"{% else %}{% endif %}>Home</a>
-
-                    <!-- <a href={% url 'generalApp:url_home' %}>Home</a> -->
+                        style="height: 1.6rem; margin-right: 0.7rem; margin-left: 0.4rem">
+    
+                        <a {% if is_current_user %} class="bold"{% else %}{% endif %}>Profile</a>
+                    </div>
+    
                 </div>
-
-                <!-- </a> -->
-
-
-                <div class="link">
-
-                    <img src="{% static 'generalApp/icons/search.png' %}" style="height: 2rem; margin-right: 0.6rem;">
-
-                    <a href="#">Search</a>
-                </div>
-
-                <div class="link-button" data-url="{% url 'generalApp:explore' %}">
-
-                    <img src="{% if request.path == '/explore/' %}
-                        {% static 'generalApp/icons/compass_black.png' %}
-                        {% else %}
-                        {% static 'generalApp/icons/compass.png'  %}
-                        {% endif %}"
-                        style="height: 2rem; margin-right: 0.6rem;">
-
-                    <a {% if request.path == '/explore/' %} class="bold"{% else %}{% endif %} href="#">Explore</a>
-                </div>
-
-                <div class="link">
-
-                    <img src="{% static 'generalApp/icons/reels.png' %}"
-                        style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
-                    <a href="#">Reels</a>
-                </div>
-
-                <div class="link">
-                    <img src="{% static 'generalApp/icons/direct.png' %}"
-                        style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
-                    <a href="#">Messages</a>
-                </div>
-
-                <div class="link">
-                    <img src="{% static 'generalApp/icons/heart.png' %}"
-                        style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
-                    <a href="#">Notifications</a>
-                </div>
-
-                <div class="link-button" data-url="{% url 'generalApp:url_create_post' %}">
-                    <img src="{% if request.path == '/create/' %}
-                        {% static 'generalApp/icons/plus_black.png' %}
-                        {% else %}
-                        {% static 'generalApp/icons/plus.png'  %}
-                        {% endif %}" style="height: 1.6rem; margin-right: 0.7rem; margin-left: 0.4rem;">
-
-                    <a {% if request.path == '/create/' %} class="bold"{% else %}{% endif %}>Create</a>
-                    <!-- <a href={% url 'generalApp:url_create_post' %}>Create</a> -->
-                </div>
-
-                <div class="link-button" data-url="{% url 'usersApp:user_prof' request.user.username %}">
-
-                    <img src="{% if is_current_user %}
-                    {% static 'generalApp/icons/user_black.png' %}
-                    {% else %}
-                    {% static 'generalApp/icons/user.png'  %}
-                    {% endif %}" 
-                    style="height: 1.6rem; margin-right: 0.7rem; margin-left: 0.4rem">
-
-                    <a {% if is_current_user %} class="bold"{% else %}{% endif %}>Profile</a>
-                </div>
-
+    
             </div>
-
+    
+    
+            <div class="bottom-container">
+    
+                <a href="{% url 'usersApp:log_out' %}">
+                    <div class="logout-btn" id="logout-btn">
+                        <p>Logout</p>
+                    </div>
+                </a>
+    
+                <div class="link" id="more">
+                    <img id="img-more" src="{% static 'generalApp/icons/more_black.png' %}" style="height: 1.6rem; margin-right: 0.6rem;">
+                    <a href="#">More</a>
+                </div>
+            </div>
+    
         </div>
 
-
-        <div class="bottom-container">
-
-            <a href="{% url 'usersApp:log_out' %}">
-                <div class="logout-btn" id="logout-btn">
-                    <p>Logout</p>
-                </div>
-            </a>
-
-            <div class="link" id="more">
-                <img src="{% static 'generalApp/icons/more_black.png' %}" style="height: 1.6rem; margin-right: 0.6rem;">
-                <a href="#">More</a>
+        <div id="extra-bar" class="extra-bar">
+            <div class="extra-container">
+                <h2>Search</h2>
+                <input type="text">
+                
             </div>
         </div>
 
     </div>
+
 
     <div class="main-container">
         {% block content %}
 
         {% endblock %}
     </div>
+    <div id="container-ex"></div>
 
 
     <div class="bottom-navbar">

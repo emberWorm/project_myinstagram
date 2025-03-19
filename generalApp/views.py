@@ -108,5 +108,6 @@ def responsa(request):
 def explore(request):
     # бог рандома
     explore_posts = models.Post.objects.all().order_by('?')
+    
     context = {"explore_posts":explore_posts}
     return render(request, 'generalApp/explore.html', context)

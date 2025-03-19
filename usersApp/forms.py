@@ -28,4 +28,21 @@ class MyProfileForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Full Name','class':'input'}))
     
     
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = models.UserProfile
+        fields = ['avatar','bio', 'name']
+
+    bio = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Bio','class':'edit-input bio', 'id':'bio-area', "maxlength":150}),required=False)
+    
+    # Установка blank=True в модели влияет только на поля, которые автоматически генерируются Django при использовании ModelForm без явного определения полей. Для явно определенных полей необходимо указывать required=False вручную.
+
+    name = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Name','class':'edit-input name', "maxlength":30 }))
+
+class EditUsernameForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username']
+
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Username','class':'edit-input', "maxlength":150 }))
 

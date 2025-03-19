@@ -31,15 +31,15 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
     /* background-color: #fafafa; */
     color: #262626;
     padding-bottom: 3rem;
-    
 
-    transform: scale(0.8); 
+
+    transform: scale(0.8);
     /* Уменьшить масштаб до 80% */
 
-    transform-origin: 0 0; 
+    transform-origin: 0 0;
     /* Установить точку начала масштабирования */
 
-    width: 100%; 
+    width: 100%;
     /* Сохранить ширину страницы */
 
     /* чуть наверх */
@@ -69,8 +69,10 @@ img {
     cursor: pointer;
 }
 
-.btn:focus {
-    outline: 0.5rem auto #4d90fe;
+/* синий на кнопочку */
+.btn:active {
+    /* outline: 0.5rem auto #4d90fe; */
+    opacity: 0.5;
 }
 
 .visually-hidden {
@@ -109,6 +111,7 @@ img {
     border-radius: 50%;
     width: 200px;
     height: 200px;
+    object-fit: cover;
 }
 
 .profile-user-settings,
@@ -120,22 +123,58 @@ img {
 
 .profile-user-settings {
     margin-top: 1.1rem;
+
 }
 
 .profile-user-name {
+    /* margin-top: -10px; */
     display: inline-block;
-    font-size: 3.2rem;
-    font-weight: 300;
+    font-size: 2.7rem;
+    /* font-weight: 300; */
+    /*  */
 }
+
+/* .profile-user-name p{
+    margin-top: 10px;
+} */
 
 .profile-edit-btn {
     font-size: 1.4rem;
     line-height: 1.8;
     border: 0.1rem solid #dbdbdb;
-    border-radius: 0.3rem;
-    padding: 0 2.4rem;
+    border-radius: 12px;
+    padding: 3px 2.4rem;
+    /* padding: 5px; */
+
     margin-left: 2rem;
+
+    background-color: #dedede;
+
+    transition: 0.1s;
 }
+
+.profile-edit-btn:hover{
+    background-color: #c0c0c0;
+}
+
+.follow {
+	color: #fff;	
+    background-color: #3897f0;
+    border: 1px solid #3897f0;
+}
+.follow:hover{
+    background-color: #077ce9;
+}
+
+/* .profile-edit-btn {
+    margin: 10px 0;
+    background-color: #3897f0;
+    border: 1px solid #3897f0;
+    border-radius: 4px;
+    text-align: center;
+    padding: 5px;
+    color: #fff;
+} */
 
 .profile-settings-btn {
     font-size: 2rem;
@@ -164,6 +203,7 @@ img {
     line-height: 1.5;
     margin-top: 2.3rem;
 }
+
 /* .profile-bio span{
 
 
@@ -173,6 +213,8 @@ img {
     padding: 0;
     margin: 0;
 } */
+
+
 
 .profile-real-name,
 .profile-stat-count,
@@ -376,7 +418,7 @@ img {
         grid-template-columns: repeat(minmax(22rem, 1fr));
 
 
-        grid-template-columns: repeat(3, 1fr); 
+        grid-template-columns: repeat(3, 1fr);
         /* Три столбца */
 
         grid-gap: 2rem;

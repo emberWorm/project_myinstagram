@@ -1,0 +1,93 @@
+{% extends 'generalApp/base_layout.html'%}
+{% load static %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href={% static "generalApp/css/edit-profile.css" %}>
+{% endblock %}
+
+
+{% block content %}
+<div class="body-edit-profile">
+
+    <div class="container-edit-profile">
+        <form method="post" enctype="multipart/form-data" class="bebra">
+            <h3>Edit profile</h3>
+            {% csrf_token %}
+            {% for field in form_ed_p %}
+            {% if field.name == 'avatar' %}
+            <div class="edit-profile-view-flex">
+                <div class="edit-profile-view">
+                    <img src="{{user.userprofile.avatar.url}}" alt="">
+
+                    <div class="edit-profile-view-info">
+                        <strong>{{user.username}}</strong>
+                        <span>{{user.userprofile.name}}</span>
+                    </div>
+                </div>
+                <div class="file-upload">
+                    <input type="file" id="image-input" name="avatar" style="display: none;">
+                    <div id="upload-button" class="photo-btn" id="change-photo">Change photo</div>
+                </div>
+            </div>
+            {% elif field.name == 'bio' %}
+            <div>
+                <h4>Bio</h4>
+                {{field}}
+                <p id="p-count"><span id="remaining">-</span><span>/150</span></p>
+
+
+            </div>
+
+            {% elif field.name == 'name' %}
+            <div>
+                <h4>Name</h4>
+                {{field}}
+                <p id="p-count"><span id="remaining">-</span><span>/25</span></p>
+            </div>
+
+            {% endif %}
+            {% endfor %}
+            <div>
+                <h4>Username</h4>
+                <p class="change-username">Changing your username will also change your <b>account</b> address.</p>
+                {{form_ed_usr.username}}
+            </div>
+            <div>
+                <input type="submit" class="photo-btn submit" style="float: right;">
+            </div>
+        </form>
+
+        <!-- <div class="edit-profile-view-flex">
+            <div class="edit-profile-view">
+                <img src="{{user.userprofile.avatar.url}}" alt="">
+
+                <div class="edit-profile-view-info">
+                    <strong>{{user.username}}</strong>
+                    <span>{{user.userprofile.name}}</span>
+                </div>
+            </div>
+            <div class="file-upload">
+                <input type="file" id="image-input" name="image" style="display: none;">
+                <div id="upload-button" class="photo-btn">Change photo</div>
+            </div>
+        </div> -->
+
+        <!-- <h4>Username</h4>
+        <p>Changing your username will also change your Instagram account address.</p>
+        <input type="text">
+
+        <h4>Name</h4>
+        <input type="text">
+
+
+        <h4>Bio</h4>
+        <input type="text">
+
+        <div class=""></div> -->
+
+        <!-- <button>Submit</button> -->
+
+    </div>
+</div>
+
+{% endblock %}

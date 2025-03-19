@@ -31,38 +31,20 @@ body {
 /*  */
 /*  */
 /*  */
-input,
-textarea,
-select,
-button {
-    font-family: inherit;
-    /* Унаследует шрифт из родителя */
+input, textarea, select, button {
+    font-family: inherit; /* Унаследует шрифт из родителя */
 }
-
 /*  */
 /*  */
 /*  */
 
-.parent-sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    /* Добавляем flex-контейнер */
-    transition: all 0.3s ease;
-    z-index: 1000;
-}
-
-.main-sidebar {
+.sidebar {
     /* background-color: var(--white); */
     /* ширина */
     width: 230px;
-    height: 100%;
-    /* height: 100vh; */
-
+    height: 100vh;
     /* закрепление дива сайдбар*/
-    /* position: fixed; */
+    position: fixed;
     /* делаем подвижными объекты и размещаем их по колонкам для сайдбара */
     /*  */
     display: flex;
@@ -77,119 +59,22 @@ button {
 
     /* наложение?? */
     z-index: 1000;
-    background-color: var(--white);
-
-}
-
-/* В 2024 году в CSS появилась поддержка вложенности селекторов с помощью оператора &. Однако, это новая функция и может не поддерживаться во всех браузерах. */
-
-.main-sidebar.add-extra-bar {
-    width: 60px;
-
-    & .upper-container {
-        align-items: center;
-    }
-
-    & .bottom-container {
-        align-items: center;
-    }
-
-
-    & .logo {
-        display: none;
-    }
-
-    & .logo2 {
-        display: block;
-        width: 1.7rem;
-        margin-top: 30px;
-        margin-bottom: 16px;
-
-    }
-
-    & .link a {
-        display: none;
-    }
-
-    /*  */
-    & .link-button a {
-        display: none;
-    }
-
-    /*  */
-
-    & .profile-suggestions {
-        display: none;
-    }
-
-    & .main-container {
-        width: 90vw;
-        margin: auto;
-    }
-
-    & .link-flex {
-        width: 50px;
-    }
-
-    & .link-button img,
-    .link img {
-        margin-left: -1px !important;
-    }
-
-    & #img-home,
-    #img-search,
-    #img-explore {
-        margin-left: -3px !important;
-    }
-
-
-    /* #img-search */
-    /* #img-explore */
-    /* #img-reels */
-    /* #img-direct */
-    /* #img-heart */
-    /* #img-create */
-    /* #img-profile */
-    /* #img-more */
 }
 
 /* search */
-.extra-bar {
-    width: 300px;
-    background-color: var(--white);
-    border-right: 1px solid var(--link-grey);
-    box-shadow: 2px 0px 8px 0px rgba(34, 60, 80, 0.14);
-
-    visibility: hidden;
-
-
-    transform: translateX(-100%);
-    /* Сдвигаем панель влево на 100% её ширины (скрываем за пределами видимости) */
-    transition: all 0.3s ease;
-    /* Плавный переход для всех свойств (0.3 секунды, easing для плавности) */
-    opacity: 0;
-    /* Делаем панель полностью прозрачной */
+.sidebar.extra-bar{
+    width: 500px;
+    background-color: #285aeb;
 }
 
-.extra-bar.active {
-    visibility: visible;
-
-    transform: translateX(0);
-    /* Возвращаем панель в исходное положение (сдвигаем на 0) */
-    opacity: 1;
-    /* Делаем панель полностью непрозрачной */
-}
-
-.extra-container {
-    width: 100%;
-    /* Занимает всю ширину extra-bar */
-    height: 100%;
-    padding: 20px;
-    /* Добавляем отступы от краев */
-    overflow-y: auto;
-    /* Добавляем прокрутку, если контента много */
-}
-
+#container-ex {
+    position: fixed;
+    top: 0;
+    left: 230px; /* Позиция слева от сайдбара */
+    width: 200px; /* Ширина нового div */
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
 
 .upper-container {
     display: flex;
@@ -260,7 +145,7 @@ a {
 .link-button:hover {
     background-color: var(--link-grey);
     cursor: pointer;
-    border-radius: 7px;
+    border-radius: 7px;  
 }
 
 
@@ -332,7 +217,7 @@ a {
 }
 
 @media screen and (max-width: 900px) {
-    .main-sidebar {
+    .sidebar {
         width: 60px;
     }
 
@@ -352,19 +237,15 @@ a {
     .logo2 {
         display: block;
         width: 1.7rem;
-        margin-top: 30px;
-        margin-bottom: 16px;
     }
 
     .link a {
         display: none;
     }
-
     /*  */
     .link-button a {
         display: none;
     }
-
     /*  */
 
     .profile-suggestions {
@@ -375,34 +256,10 @@ a {
         width: 90vw;
         margin: auto;
     }
-
-    .link-flex {
-        width: 50px;
-    }
-
-    .link-button img,
-    .link img {
-        margin-left: -1px !important;
-    }
-
-    #img-home,
-    #img-search,
-    #img-explore {
-        margin-left: -3px !important;
-    }
-
-    /* #img-search */
-    /* #img-explore */
-    /* #img-reels */
-    /* #img-direct */
-    /* #img-heart */
-    /* #img-create */
-    /* #img-profile */
-    /* #img-more */
 }
 
 @media screen and (max-width: 600px) {
-    .main-sidebar {
+    .sidebar {
         display: none;
     }
 
@@ -563,10 +420,9 @@ align-items:
 .post-info-flex p:hover,
 .list-time:hover,
 .profile-rec img:hover,
-.profile-rec strong:hover {
+.profile-rec strong:hover{
     cursor: pointer;
 }
-
 /*  */
 
 .list-time {
@@ -686,7 +542,7 @@ align-items:
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
+    body{
         /* background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); */
         /* background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%); */
         background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
@@ -694,18 +550,17 @@ align-items:
 }
 
 
-.logout-btn {
+.logout-btn{
     display: none;
     border: 1px solid #000;
     border-radius: 10px;
     text-align: center;
 }
-
-.logout-btn p {
+.logout-btn p{
     color: brown;
 
 }
 
-.logout-btn.open {
+.logout-btn.open{
     display: block;
 }

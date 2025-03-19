@@ -3,6 +3,8 @@ from django.contrib.auth import login, logout
 from . import forms, models
 from generalApp.models import Post
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+
 
 def log_in(request):
     form = forms.MyLoginForm(data=request.POST or None)
@@ -62,3 +64,34 @@ def jopa(request, username):
     
     return render(
         request, 'generalApp/profile_last_ver.html', context)
+        # request, 'generalApp/PROFILENEW.html', context)
+
+@login_required(login_url='users:log_in')
+def edit_profile(request, username):
+
+    user = models.User.objects.get(username=username)
+
+    userprofile = models.UserProfile.objects.get(user_id=user.id)
+    form_ed_p = forms.EditProfileForm(request.POST or None, request.FILES or None, instance=userprofile)
+    form_ed_usr = forms.EditUsernameForm(request.POST or None, instance=user)
+
+    print("ABOBA")
+    print(userprofile)
+
+    # form = forms.MyProfileForm(request.POST or None, request.FILES or None, instance=post_data)
+    if form_ed_p.is_valid() and form_ed_usr.is_valid():
+        form_ed_p.save()
+        form_ed_usr.save()
+
+        # во избежание ошибок  с перенаправлением используем функ reverse() которая создает url с параметрами
+        new_username = user.username
+        return redirect(reverse('users:profile_edit', kwargs={'username': new_username})) # keyword agrs именованные а не позиционные
+    
+        # Если обычная маршрутизация — это процесс "входа" (URL → представление), то reverse() — это процесс "выхода" (представление/маршрут → URL)
+
+        # return redirect(request.path)
+        # return redirect(reverse('profile_edit', kwargs={'user_id': user.id}))
+
+
+    context = {"user":user, "form_ed_p":form_ed_p, 'form_ed_usr':form_ed_usr}
+    return render(request, 'generalApp/edit-profile.html', context)

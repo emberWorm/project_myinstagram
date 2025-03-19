@@ -1,0 +1,134 @@
+.body-edit-profile {
+    width: 100%;
+}
+
+
+.container-edit-profile {
+    /* border: 1px solid black; */
+    width: 50%; 
+    /* Ширина дочернего элемента */
+    /* height: 90%; */
+    /* margin: 0 auto;  */
+    /* 0 - верхний и нижний auto - справа и слева */
+    /* Центрирует по горизонтали */
+}
+
+
+.edit-profile-view {
+    display: flex;
+    align-items: center;
+}
+
+.edit-profile-view img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 0.75rem;
+}
+
+.edit-profile-view-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-profile-view-flex{
+    background-color: rgb(224, 224, 224);
+    border-radius: 25px;
+    padding: 1rem 1rem;
+    display: flex;
+    align-items: center;
+
+
+    justify-content: space-between;
+}
+
+/* спижжено из create post */
+.photo-btn {
+    margin: 20px auto;
+    background-color: #3897f0;
+    border: 1px solid #3897f0;
+    text-align: center;
+    padding: 5px;
+    color: #fff;
+
+    border-radius: 7px;
+
+    padding: 0.35rem;
+    height: 20px;
+    width: 100px;
+    font-size: 15px;
+    /* font-weight: 500; */
+    display: block;
+    /* margin: auto; */
+
+}
+
+.photo-btn:hover {
+    background-color: #077ce9;
+    cursor: pointer;
+}
+.photo-btn.load {
+    background-color: #045bac;
+    cursor: pointer;
+}
+
+/*  */
+
+.edit-input{
+    border: 1px solid var(--link-grey);
+    border-radius: 7px;
+    padding: 12px;
+
+    box-sizing: border-box; /* Учитывает border и padding в ширине */
+    resize: none;
+    /* width: 350px; */
+    width: 100%;
+}
+
+.bio{
+    height: 100px;
+    /* width: 350px; */
+
+}
+
+.name{
+    height: 42px;
+    overflow: hidden;
+    /* width: 350px; */
+}
+
+.edit-input:focus {
+    outline: none;
+    border: 1px solid black;
+}
+
+.bebra {
+    padding: 20px;
+}
+
+.submit{
+    margin-top: 25px;
+    height: 2rem;
+    width: 150px;
+}
+
+span{
+    color: gray;
+    font-size: 12px;
+}
+
+#p-count {
+    display: inline;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.change-username {
+    font-size: 12px;
+    color: burlywood;
+}
+
+#change-photo{
+    font-weight: 100;
+}
