@@ -1,7 +1,7 @@
 // alert('js here');
 
 // реализация ссылки не трогая макет страницы
-document.querySelectorAll('.link-button, .profile-pic, .obj-click').forEach(function (button) {
+document.querySelectorAll('.link-button, .profile-pic, .obj-click, .search-profile').forEach(function (button) {
 
     button.addEventListener('click',
         function () {
@@ -14,11 +14,31 @@ document.getElementById('more').addEventListener('click', function () {
 });
 
 // пришлось перенести выше
-document.getElementById('search').addEventListener('click', function () {
+// document.getElementById('search').addEventListener('click', function () {
+
+//     document.getElementById('extra-bar').classList.toggle('active');
+//     document.getElementById('main-sidebar').classList.toggle('add-extra-bar');
+//     console.log('КЛИК');
+//     document.getElementById('extra-container').innerHTML = `
+//     <h2>Search</h2>
+//     <div class="search-input-div">
+//             <input id="search-input" type="search" placeholder="Search">
+//     </div>
+//     <div class="search-results" id="search-results">
+        
+//     </div>`;
+
+
+// });
+
+document.getElementById('notifications').addEventListener('click', function () {
 
     document.getElementById('extra-bar').classList.toggle('active');
     document.getElementById('main-sidebar').classList.toggle('add-extra-bar');
     console.log('КЛИК');
+    document.getElementById('extra-container').innerHTML = `<h2>Notifications</h2>`;
+
+    
 
 });
 

@@ -155,15 +155,17 @@ button {
 
 /* search */
 .extra-bar {
-    width: 300px;
+    width: 400px;
     background-color: var(--white);
     border-right: 1px solid var(--link-grey);
     box-shadow: 2px 0px 8px 0px rgba(34, 60, 80, 0.14);
 
-    visibility: hidden;
+    border-radius: 15px;
 
+    /* visibility: hidden; */
 
-    transform: translateX(-100%);
+    display: none;
+    /* transform: translateX(-100%); */
     /* Сдвигаем панель влево на 100% её ширины (скрываем за пределами видимости) */
     transition: all 0.3s ease;
     /* Плавный переход для всех свойств (0.3 секунды, easing для плавности) */
@@ -172,9 +174,9 @@ button {
 }
 
 .extra-bar.active {
-    visibility: visible;
-
-    transform: translateX(0);
+    /* visibility: visible; */
+    display: block;
+    /* transform: translateX(0); */
     /* Возвращаем панель в исходное положение (сдвигаем на 0) */
     opacity: 1;
     /* Делаем панель полностью непрозрачной */
@@ -188,6 +190,7 @@ button {
     /* Добавляем отступы от краев */
     overflow-y: auto;
     /* Добавляем прокрутку, если контента много */
+;
 }
 
 
@@ -708,4 +711,48 @@ align-items:
 
 .logout-btn.open {
     display: block;
+}
+
+.search-results{
+    /* border: 1px solid black; */
+    width: 350px;
+}
+
+#search-input{
+    border: 1px solid var(--link-grey);
+    border-radius: 7px;
+    padding: 12px;
+    margin-bottom: 10px;
+
+    box-sizing: border-box; /* Учитывает border и padding в ширине */
+    resize: none;
+    width: 350px;
+    
+}
+
+#search-input:focus {
+    outline: none;
+    /* border: 1px solid black; */
+}
+
+.search-profile{
+    width: 350px;
+    transition: transform 0.1s ease-in-out;
+}
+
+/* .search-results{
+    
+} */
+
+/* СДЕЛАТЬ ХОВЕР НА ВСЮ ШИРИНУ ВЫБОРА ЮЗЕРА КАК В ИНСТЕ */
+
+.search-profile:hover{
+    background-color: var(--link-grey);
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.search-profile:active{
+    transform: scale(0.97);
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
 }

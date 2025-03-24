@@ -18,6 +18,8 @@
 
     {% block extra_styles %}{% endblock %}
     <script src={% static "generalApp/js/base.js" %} defer></script>
+    <script src={% static "generalApp/js/search_my.js" %} defer></script>
+
 </head>
 
 <body>
@@ -50,7 +52,7 @@
                     <!-- </a> -->
     
     
-                    <div id="search" class="link">
+                    <div class="link" id="search">
     
                         <img id="img-search" src="{% static 'generalApp/icons/search.png' %}" style="height: 2rem; margin-right: 0.6rem;">
     
@@ -82,7 +84,7 @@
                         <a href="#">Messages</a>
                     </div>
     
-                    <div class="link">
+                    <div class="link" id="notifications">
                         <img id="img-heart" src="{% static 'generalApp/icons/heart.png' %}"
                             style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
                         <a href="#">Notifications</a>
@@ -133,10 +135,8 @@
         </div>
 
         <div id="extra-bar" class="extra-bar">
-            <div class="extra-container">
-                <h2>Search</h2>
-                <input type="text">
-                
+            <div class="extra-container" id="extra-container">
+
             </div>
         </div>
 

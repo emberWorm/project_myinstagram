@@ -6,13 +6,25 @@ from django.http import JsonResponse
 
 from usersApp.models import UserProfile
 
+from django.db.models import Q
 
+from django.template.response import TemplateResponse
+
+from django.http import JsonResponse
+
+# def base(request):
+#     q = request.GET.get("q")
+
+#     if q:
+#        users_q = models.User.objects.filter(Q(username__icontains=q))
+
+#     context = {'variable': 'значение'}
+#     return TemplateResponse(request, 'generalApp/base_layout.html')
 
 
 @login_required(login_url='users:log_in')
 def home(request):
     all_posts = models.Post.objects.all()
-
 
     context = {
         "all_posts":all_posts,
@@ -111,3 +123,27 @@ def explore(request):
     
     context = {"explore_posts":explore_posts}
     return render(request, 'generalApp/explore.html', context)
+
+def get_search_data(request):
+    pass
+
+def get_data(request):
+    param = request.GET.get('param')
+
+    search_users = models.User.objects.filter(
+        Q(userprofile__name__icontains=param) | 
+        Q(username__icontains=param))
+    #i contains - ingnor case contains
+
+    #json не принимает queryset поэтому его надо запарсить в список
+    users_list = [{'username': bebra.username, 
+                   'name': bebra.userprofile.name, 
+                   'avatar_url': bebra.userprofile.avatar.url} 
+                   for bebra in search_users]
+    # я не думал что будет работаь с первого раза
+    
+    result_users = {'users': users_list}
+
+    # data = {'key': 'Привет, это JSON-ответ из Django! ты ввел ' + param}
+
+    return JsonResponse(result_users)
