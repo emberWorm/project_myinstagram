@@ -190,7 +190,7 @@ button {
     /* Добавляем отступы от краев */
     overflow-y: auto;
     /* Добавляем прокрутку, если контента много */
-;
+    ;
 }
 
 
@@ -713,21 +713,22 @@ align-items:
     display: block;
 }
 
-.search-results{
+.search-results {
     /* border: 1px solid black; */
     width: 350px;
 }
 
-#search-input{
+#search-input {
     border: 1px solid var(--link-grey);
     border-radius: 7px;
     padding: 12px;
     margin-bottom: 10px;
 
-    box-sizing: border-box; /* Учитывает border и padding в ширине */
+    box-sizing: border-box;
+    /* Учитывает border и padding в ширине */
     resize: none;
     width: 350px;
-    
+
 }
 
 #search-input:focus {
@@ -735,7 +736,7 @@ align-items:
     /* border: 1px solid black; */
 }
 
-.search-profile{
+.search-profile {
     width: 350px;
     transition: transform 0.1s ease-in-out;
 }
@@ -746,13 +747,37 @@ align-items:
 
 /* СДЕЛАТЬ ХОВЕР НА ВСЮ ШИРИНУ ВЫБОРА ЮЗЕРА КАК В ИНСТЕ */
 
-.search-profile:hover{
+.search-profile:hover {
     background-color: var(--link-grey);
     cursor: pointer;
     border-radius: 7px;
 }
 
-.search-profile:active{
+.search-profile:active {
     transform: scale(0.97);
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 2% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80vw;
+    height: 81.5vh;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }

@@ -1,7 +1,7 @@
 // alert('js here');
 
 // реализация ссылки не трогая макет страницы
-document.querySelectorAll('.link-button, .profile-pic, .obj-click, .search-profile').forEach(function (button) {
+document.querySelectorAll('.link-button, .profile-pic, .obj-click').forEach(function (button) {
 
     button.addEventListener('click',
         function () {

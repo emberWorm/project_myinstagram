@@ -1,0 +1,92 @@
+{% load static %}
+
+<div class="modal-post-container">
+    <div class="modal-post-image">
+        <img src="{{ post.image.url }}" alt="">
+    </div>
+
+    <div class="modal-post-content">
+        <div class="modal-post-header">
+            <div class="post-info-flex"> 
+                <!-- в бейсзе -->
+                <img src="{{ post.author.userprofile.avatar.url }}" data-url="{% url 'usersApp:user_prof' post.author.username %}" alt="Фото профиля" class="modal-profile-pic">
+                <span class="modal-username">{{post.author}}</span>
+            </div>
+            <img class="post-icon" src="{% static 'generalApp/icons/moree.png' %}" style="height: 1.3rem;">
+        </div>
+
+        <div class="comments-section">
+
+            {% if post.body %}
+            <div class="modal-comment">
+                <!-- <img src="avatar-placeholder.jpg" class="avatar" alt="Avatar"> -->
+                <div>
+                    <img src="{{ post.author.userprofile.avatar.url }}" alt="Фото профиля" class="avatar"
+                        data-url="{% url 'usersApp:user_prof' post.author.username %}">
+                </div>
+                <div class="comment-info">
+                    <!-- <span class="comment-username">pullheriba</span> -->
+                    <span class="comment-username">{{post.author}}</span>
+                    <!-- <div class="comment-text"></div> -->
+                    {{post.body}}
+                    <div style="color: #8e8e8e;">1d Reply</div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="modal-comment">
+                <div>
+                    <img src="{% static 'generalApp/bubu/p6.jpg' %}" class="avatar" alt="Avatar">
+                </div>
+                <div class="comment-info">
+                    <span class="comment-username">pullheriba</span>
+                    приехал на родину...
+                    <div style="color: #8e8e8e;">1d Reply</div>
+                </div>
+            </div>
+
+            <div class="modal-comment">
+                <div>
+                    <img src="{% static 'generalApp/bubu/p4.jpg' %}" class="avatar" alt="Avatar">
+                </div>
+                <div class="comment-info">
+                    <span class="comment-username">loriikris</span>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae optio perspiciatis iure nam
+                    placeat magni quae? Ad eveniet, commodi et, fugiat quod ut quaerat velit earum harum quidem dolor
+                    voluptatem?
+                    <div style="color: #8e8e8e;">1d Reply</div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-info" style="color: #8e8e8e;">
+                    View hidden comments
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="post-actions">
+            <button class="action-btn">❤️</button>
+            <button class="action-btn">💬</button>
+            <button class="action-btn">↗️</button>
+        </div> -->
+
+        <div class="modal-post-icons">
+            <div class="modal-post-icons-left">
+                <img class="post-icon" src="{% static 'generalApp/icons/heart.png' %}" alt="" style="height: 1.4rem;">
+                <img class="post-icon" src="{% static 'generalApp/icons/speech-bubble.png' %}"
+                    style="height: 1.5rem; width: 1.4rem;" alt="">
+                <img class="post-icon" src="{% static 'generalApp/icons/direct.png' %}" style="height: 1.4rem;" alt="">
+            </div>
+            <img class="post-icon" src="{% static 'generalApp/icons/bookmark.png' %}" style="height: 1.4rem;" alt="">
+        </div>
+        <div style="font-size: 14px; margin-bottom: 5px;"><b>12,900 likes</b></div>
+        <span style="font-size: 12px; color: grey;">23 hours ago</span>
+
+
+        <form class="modal-comment-form">
+            <input type="text" class="comment-input" placeholder="Add a comment...">
+            <button type="submit" class="post-btn">Post</button>
+        </form>
+    </div>
+</div>

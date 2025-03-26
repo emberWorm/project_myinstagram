@@ -62,7 +62,8 @@
             </div>
             <p class="likes">100 likes</p>
             <p class="caption">{{ post.body }}</p>
-            <a href="{% url 'generalApp:view_post' post.pk %}" class="comments">View all comments</a>
+            <a href="{% url 'generalApp:view_post' post.pk %}" class="comments open_post_link" 
+            data-post-id="{{ post.pk }}">View all comments</a>
         </div>
 
         {% endfor %}

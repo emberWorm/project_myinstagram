@@ -70,7 +70,7 @@
                 {% for post in posts_user reversed %}
                 <div class="gallery-item" tabindex="0">
 
-                    <a href="{% url 'generalApp:view_post' post.pk %}">
+                    <a href="{% url 'generalApp:view_post' post.pk %}" class="open_post_link" data-post-id="{{ post.pk }}">
 
                         <img src="{{ post.image.url }}" class="gallery-image" alt="">
 

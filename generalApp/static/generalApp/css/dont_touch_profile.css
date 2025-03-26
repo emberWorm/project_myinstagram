@@ -256,7 +256,7 @@ img {
 }
 
 .gallery-item-info {
-    display: none;
+    display: none;;
 }
 
 .gallery-item-info li {
@@ -267,6 +267,9 @@ img {
 
 .gallery-item-likes {
     margin-right: 2.2rem;
+}
+.gallery-item-comments {
+    margin-right: 2.5rem;
 }
 
 .gallery-item-type {

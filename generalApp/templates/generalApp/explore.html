@@ -10,13 +10,14 @@
 {% block content %}
 <div class="container-exp">
 
-    <h1>Открывайте новое для себя</h1>
+    <h1 style="margin-top: 50px; margin-bottom: 50px;"><i>Discover new for yourself </i>🌟</h1>
 
     <div class="gallery">
         {% for post in explore_posts %}
         <div class="gallery-item" tabindex="0">
 
-            <a href="{% url 'generalApp:view_post' post.pk %}">
+            <a href="{% url 'generalApp:view_post' post.pk %}" class="open_post_link" 
+            data-post-id="{{ post.pk }}">
 
                 <img src="{{ post.image.url }}" class="gallery-image" alt="">
 

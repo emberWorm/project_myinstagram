@@ -60,7 +60,7 @@ def insta_post(request, pk):
     context = {
         "post":my_post,
     }
-    return render(request, 'generalApp/post.html', context)
+    return render(request, 'generalApp/post_modal_n.html', context)
 
 @login_required(login_url='users:log_in')
 def create_post(request):

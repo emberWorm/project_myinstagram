@@ -15,10 +15,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href={% static "generalApp/css/base.css" %}>
+    <link rel="stylesheet" href={% static "generalApp/css/post_modal.css" %}>
 
     {% block extra_styles %}{% endblock %}
     <script src={% static "generalApp/js/base.js" %} defer></script>
     <script src={% static "generalApp/js/search_my.js" %} defer></script>
+    <script src={% static "generalApp/js/open_modal_post.js" %} defer></script>
+
 
 </head>
 
@@ -28,6 +31,9 @@
             <div class="upper-container">
                 <img src="{% static 'generalApp/icons/InstagramLogo.png' %}" class="logo">
                 <img src="{% static 'generalApp/icons/instaa.png' %}" class="logo2">
+
+                <!-- <button id="openModal" class="open_post_link">Открыть модальное окно</button> -->
+
     
                 <div class="link-flex">
     
@@ -144,6 +150,7 @@
 
 
     <div class="main-container">
+
         {% block content %}
 
         {% endblock %}
@@ -185,6 +192,45 @@
         </div>
 
     </div>
+    
+    <div id="myModal" class="modal">
+        <!-- <button class="close" aria-label="Закрыть">×</button> -->
+        <span class="close">×</span>
+        <div class="modal-content" id="modal-content">
+          <!-- <h2>Ваш контент здесь</h2>
+          <p>Это модальное окно!</p> -->
+        </div>
+      </div>
+
+    <script>
+        // Получаем элементы
+        const modal = document.getElementById("myModal");
+        const btns = document.querySelectorAll(".open_post_link");
+        const span = document.getElementsByClassName("close")[0];
+        // const modalcont = document.getElementById('modal-content');
+      
+        // Открытие модального окна
+        btns.forEach(btn => { // Исправлено для работы с коллекцией элементов
+            btn.onclick = function() {
+                modal.style.display = "block";
+                document.body.style.overflow = "hidden";
+            }
+        });
+      
+        // Закрытие по крестику
+        span.onclick = function() {
+          modal.style.display = "none";
+          history.back();
+        }
+      
+        // Закрытие при клике вне окна
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+            history.back();
+          }
+        }
+      </script>
 
 </body>
 
