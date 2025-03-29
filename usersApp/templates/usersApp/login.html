@@ -14,7 +14,7 @@
 	<div class="header">
 		<div class="top">
 			<div class="logo">
-				<img src="{% static 'usersApp/icons/instagram.png' %}" alt="instagram" style="width: 175px;">
+				<img src="{% static 'generalApp/icons/mysocialgram.png' %}" alt="logo" style="width: 175px;">
 			</div>
 			<div class="form">
 				
@@ -89,5 +89,17 @@
 	</div>
 </div>
 
+<script>
+	const btn = document.querySelector('.btn');
+	
+	btn.addEventListener('mouseenter', () => {
+	  btn.classList.add('animate');
+	});
+	
+	btn.addEventListener('animationend', () => {
+	  btn.classList.remove('animate');
+	});
+	</script>
+	
 </body>
 </html>

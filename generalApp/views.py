@@ -12,6 +12,10 @@ from django.template.response import TemplateResponse
 
 from django.http import JsonResponse
 
+from datetime import datetime
+
+from django.http import HttpResponse
+
 # def base(request):
 #     q = request.GET.get("q")
 
@@ -24,7 +28,7 @@ from django.http import JsonResponse
 
 @login_required(login_url='users:log_in')
 def home(request):
-    all_posts = models.Post.objects.all()
+    all_posts = models.Post.objects.all().order_by('-when_added')
 
     context = {
         "all_posts":all_posts,
@@ -55,12 +59,48 @@ def profile(request):
     return render(
         request, 'generalApp/profile_last_ver.html', context)
 
+@login_required(login_url='users:log_in')
 def insta_post(request, pk):
     my_post = models.Post.objects.get(pk=pk)
+    # time_display = my_post.when_added.date()
+    time_display = my_post.when_added
+         # формат настроен в LANGUAGE_CODE = 'en-us', USE_I18N = True-?
+        # (django/conf/locale/<locale>/formats.py).
+
+   # Проверяем, AJAX-ли это запрос Чтобы можно было пререходить по прямой ссылке
+    if request.headers.get('X-Request-With') == 'Fetch':
+        template = 'generalApp/post_modal_n.html'  # Только контент модалки
+    else:
+        template = 'generalApp/post.html'
+
+    # now_time = datetime.now()
+    # time_diff = now_time - time_display
+
+    # print("ВНИМАНИЕ")
+
+    # print(time_diff)
+
+
     context = {
         "post":my_post,
+        'time_display':time_display,
     }
-    return render(request, 'generalApp/post_modal_n.html', context)
+    return render(request, template, context)
+
+@login_required(login_url='users:log_in')
+def delete_post(request, id):
+    post = models.Post.objects.get(pk=id)
+    if request.user == post.author:
+        post.delete()
+    else:
+        print("DEBUG НЕТУ КАРОЧЕ НЕ ТОТ ЮЗЕР")
+    # return redirect('generalApp:user_prof', username=request.user.username)
+    htprespone = HttpResponse()
+    print("WARNING /////")
+    print(htprespone)
+    print("///// WARNING")
+    return HttpResponse()
+
 
 @login_required(login_url='users:log_in')
 def create_post(request):

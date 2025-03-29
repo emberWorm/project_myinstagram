@@ -67,7 +67,7 @@
         <div class="container">
             {% if posts_user %}
             <div class="gallery">
-                {% for post in posts_user reversed %}
+                {% for post in posts_user %}
                 <div class="gallery-item" tabindex="0">
 
                     <a href="{% url 'generalApp:view_post' post.pk %}" class="open_post_link" data-post-id="{{ post.pk }}">

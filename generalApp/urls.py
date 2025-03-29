@@ -10,5 +10,7 @@ urlpatterns = [
     path('profile/', views.profile, name='url_profile'),
     path('post/<int:pk>/', views.insta_post, name="view_post"),
     path('create/', views.create_post, name="url_create_post" ),
-    path('explore/', views.explore, name='explore')
+    path('explore/', views.explore, name='explore'),
+    path('post/<int:id>/delete/', views.delete_post, name="delete_post"),
+
 ]

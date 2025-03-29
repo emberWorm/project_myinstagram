@@ -5,14 +5,17 @@
         <img src="{{ post.image.url }}" alt="">
     </div>
 
-    <div class="modal-post-content">
+    <div class="modal-post-content"
+    data-post-id="{{ post.id }}"
+    data-author-id="{{ post.author.id }}"
+    data-user-id="{{ request.user.id }}">
         <div class="modal-post-header">
             <div class="post-info-flex"> 
                 <!-- в бейсзе -->
                 <img src="{{ post.author.userprofile.avatar.url }}" data-url="{% url 'usersApp:user_prof' post.author.username %}" alt="Фото профиля" class="modal-profile-pic">
                 <span class="modal-username">{{post.author}}</span>
             </div>
-            <img class="post-icon" src="{% static 'generalApp/icons/moree.png' %}" style="height: 1.3rem;">
+            <img class="post-icon" id="open_more_post_link" src="{% static 'generalApp/icons/moree.png' %}" style="height: 1.3rem;">
         </div>
 
         <div class="comments-section">
@@ -81,7 +84,7 @@
             <img class="post-icon" src="{% static 'generalApp/icons/bookmark.png' %}" style="height: 1.4rem;" alt="">
         </div>
         <div style="font-size: 14px; margin-bottom: 5px;"><b>12,900 likes</b></div>
-        <span style="font-size: 12px; color: grey;">23 hours ago</span>
+        <span style="font-size: 12px; color: grey;">{{time_display}}</span>
 
 
         <form class="modal-comment-form">

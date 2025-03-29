@@ -46,7 +46,7 @@ def register(request):
 def jopa(request, username):
     user = models.User.objects.get(username=username)
 
-    posts_user = Post.objects.filter(author_id=user.id)
+    posts_user = Post.objects.filter(author_id=user.id).order_by('-when_added')
     post_count = posts_user.count()
 
     if request.user.username == username:

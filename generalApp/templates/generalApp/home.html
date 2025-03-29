@@ -27,10 +27,11 @@
 
     </div>
 
+
     <!-- posts -->
     <div class="posts-container">
 
-        {% for post in all_posts reversed %}
+        {% for post in all_posts %}
 
         <div class="post">
             <div class="post-header">
@@ -39,12 +40,14 @@
                     <img src="{{ post.author.userprofile.avatar.url }}" alt="Фото профиля" class="profile-pic"
                         data-url="{% url 'usersApp:user_prof' post.author.username %}">
 
-                    <p class="obj-click" data-url="{% url 'usersApp:user_prof' post.author.username %}">{{ post.author}}</p>
+                    <p class="obj-click" data-url="{% url 'usersApp:user_prof' post.author.username %}">{{ post.author}}
+                    </p>
                     <ul>
                         <li class="list-time"> 8 hrs</li>
                     </ul>
                 </div>
-                <img class="post-icon" src="{% static 'generalApp/icons/moree.png' %}" style="height: 1.3rem;">
+                <img class="post-icon open_more_link" src="{% static 'generalApp/icons/moree.png' %}"
+                    style="height: 1.3rem;">
             </div>
 
             <img src="{{ post.image.url }}" alt="Post Image" class="post-img" />
@@ -53,7 +56,8 @@
                 <div class="post-icons-left">
                     <img class="post-icon" src="{% static 'generalApp/icons/heart.png' %}" alt=""
                         style="height: 1.4rem;">
-                    <img class="post-icon" src="{% static 'generalApp/icons/speech-bubble.png' %}" style="height: 1.5rem; width: 1.4rem;" alt="">
+                    <img class="post-icon" src="{% static 'generalApp/icons/speech-bubble.png' %}"
+                        style="height: 1.5rem; width: 1.4rem;" alt="">
                     <img class="post-icon" src="{% static 'generalApp/icons/direct.png' %}" style="height: 1.4rem;"
                         alt="">
                 </div>
@@ -62,8 +66,8 @@
             </div>
             <p class="likes">100 likes</p>
             <p class="caption">{{ post.body }}</p>
-            <a href="{% url 'generalApp:view_post' post.pk %}" class="comments open_post_link" 
-            data-post-id="{{ post.pk }}">View all comments</a>
+            <a href="{% url 'generalApp:view_post' post.pk %}" class="comments open_post_link"
+                data-post-id="{{ post.pk }}">View all comments</a>
         </div>
 
         {% endfor %}
@@ -78,11 +82,13 @@
 
         <div class="profile-rec">
 
-            <img class="obj-click" data-url="{% url 'usersApp:user_prof' request.user.username %}" src="{{ user.userprofile.avatar.url }}" alt="Profile Picture" />
+            <img class="obj-click" data-url="{% url 'usersApp:user_prof' request.user.username %}"
+                src="{{ user.userprofile.avatar.url }}" alt="Profile Picture" />
 
             <div class="profile-rec-info">
 
-                <strong class="obj-click" data-url="{% url 'usersApp:user_prof' request.user.username %}">{{user.username}}</strong>
+                <strong class="obj-click"
+                    data-url="{% url 'usersApp:user_prof' request.user.username %}">{{user.username}}</strong>
 
                 <span class="profile-rec-info-name">{{ user.userprofile.name }}</span>
             </div>

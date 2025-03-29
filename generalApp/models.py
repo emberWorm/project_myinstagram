@@ -37,3 +37,8 @@ class Followers(models.Model):
     class Meta:
         db_table = 'Followers'
         verbose_name = 'FollOOWWWERRS'
+
+# class Comment(models.Model):
+#     body = models.TextField()
+#     when_added = models.DateTimeField(default=datetime.now)
+#     author = models.ForeignKey(User)

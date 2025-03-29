@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'generalApp',
     'usersApp',
+    'django_cleanup.apps.CleanupConfig', # чистка при удалении объектов моделей
 ]
 
 MIDDLEWARE = [
