@@ -30,10 +30,29 @@
 
 .modal-post-content {
     flex: 1;
+    /* padding: 16px 0px; */
     padding: 16px;
+    /* pad изменен */
     display: flex;
     flex-direction: column;
 }
+/* .modal-post-header, 
+.modal-post-icons, 
+.modal-comment-form {
+    padding: 0 16px;
+
+} */
+
+/* .modal-post-header {
+    padding: 0 16px;
+}
+.comments-section {
+    margin: 0px 16px;
+}
+
+.modal-post-icons{
+    margin: 0 16px;
+} */
 
 .modal-post-header {
     display: flex;

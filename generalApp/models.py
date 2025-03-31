@@ -17,6 +17,7 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         null=True, blank=True, default=None)
     when_added = models.DateTimeField(default=datetime.now)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
 class Followers(models.Model):
     # айдишник подписки (или как?)

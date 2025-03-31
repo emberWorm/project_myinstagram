@@ -12,5 +12,6 @@ urlpatterns = [
     path('create/', views.create_post, name="url_create_post" ),
     path('explore/', views.explore, name='explore'),
     path('post/<int:id>/delete/', views.delete_post, name="delete_post"),
+    path('post_like/<int:post_id>/', views.post_like, name="post_like"),
 
 ]

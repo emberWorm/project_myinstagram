@@ -54,8 +54,18 @@
 
             <div class="post-icons">
                 <div class="post-icons-left">
-                    <img class="post-icon" src="{% static 'generalApp/icons/heart.png' %}" alt=""
-                        style="height: 1.4rem;">
+
+                    <img class="post-icon img-like"
+                    src="{% if user in post.likes.all %}
+                    {% static 'generalApp/icons/heart_red.png' %}
+                    {% else %}
+                    {% static 'generalApp/icons/heart.png' %}
+                    {% endif%}" 
+                    data-liked-src="{% static 'generalApp/icons/heart_red.png' %}"
+                    data-unliked-src="{% static 'generalApp/icons/heart.png' %}" 
+                    data-post-id="{{ post.id }}"
+                    style="height: 1.4rem;">
+
                     <img class="post-icon" src="{% static 'generalApp/icons/speech-bubble.png' %}"
                         style="height: 1.5rem; width: 1.4rem;" alt="">
                     <img class="post-icon" src="{% static 'generalApp/icons/direct.png' %}" style="height: 1.4rem;"
@@ -64,8 +74,10 @@
                 <img class="post-icon" src="{% static 'generalApp/icons/bookmark.png' %}" style="height: 1.4rem;"
                     alt="">
             </div>
-            <p class="likes">100 likes</p>
-            <p class="caption">{{ post.body }}</p>
+            <p class="likes" style="font-size: 13px; font-weight: bold; margin-bottom: 10px;"><span class="likes-count">{{ post.likes.count|add:350 }} </span> likes</p>
+            {% if post.body %}
+            <p class="caption" style="font-size: 13px; "><b>{{ post.author}}</b>  {{post.body}}</p>
+            {%endif%}
             <a href="{% url 'generalApp:view_post' post.pk %}" class="comments open_post_link"
                 data-post-id="{{ post.pk }}">View all comments</a>
         </div>

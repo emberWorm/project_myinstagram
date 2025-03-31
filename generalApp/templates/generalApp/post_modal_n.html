@@ -76,15 +76,25 @@
 
         <div class="modal-post-icons">
             <div class="modal-post-icons-left">
-                <img class="post-icon" src="{% static 'generalApp/icons/heart.png' %}" alt="" style="height: 1.4rem;">
+                <img class="post-icon img-like" 
+                src="{% if user in post.likes.all %}
+                {% static 'generalApp/icons/heart_red.png' %}
+                {% else %}
+                {% static 'generalApp/icons/heart.png' %}
+                {% endif%}" 
+                data-liked-src="{% static 'generalApp/icons/heart_red.png' %}"
+                data-unliked-src="{% static 'generalApp/icons/heart.png' %}" 
+                data-post-id="{{ post.id }}"
+                style="height: 1.4rem;">
                 <img class="post-icon" src="{% static 'generalApp/icons/speech-bubble.png' %}"
                     style="height: 1.5rem; width: 1.4rem;" alt="">
                 <img class="post-icon" src="{% static 'generalApp/icons/direct.png' %}" style="height: 1.4rem;" alt="">
             </div>
             <img class="post-icon" src="{% static 'generalApp/icons/bookmark.png' %}" style="height: 1.4rem;" alt="">
         </div>
-        <div style="font-size: 14px; margin-bottom: 5px;"><b>12,900 likes</b></div>
-        <span style="font-size: 12px; color: grey;">{{time_display}}</span>
+        <!-- <div style="font-size: 14px; margin-bottom: 5px;" class="likes-count"><b>12,900 likes</b></div> -->
+        <p class="likes" style="font-size: 14px; font-weight: bold;"><span class="likes-count">{{ post.likes.count|add:350 }} </span> likes</p>
+        <span style="font-size: 12px; margin-bottom: 10px; color: grey;">{{time_display}}</span>
 
 
         <form class="modal-comment-form">

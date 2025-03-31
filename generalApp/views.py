@@ -187,3 +187,17 @@ def get_data(request):
     # data = {'key': 'Привет, это JSON-ответ из Django! ты ввел ' + param}
 
     return JsonResponse(result_users)
+
+
+def post_like(request, post_id):
+    post_data = models.Post.objects.get(pk=post_id)
+
+    if request.user not in post_data.likes.all():
+        post_data.likes.add(request.user)
+    elif request.user in post_data.likes.all():
+        post_data.likes.remove(request.user)
+
+    post_likes = post_data.likes.count()
+    
+
+    return JsonResponse({'likes': post_likes})
