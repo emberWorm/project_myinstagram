@@ -23,6 +23,8 @@
     <script src={% static "generalApp/js/search_my.js" %} defer></script>
     <script src={% static "generalApp/js/open_modal_post.js" %} defer></script>
     <script src={% static "generalApp/js/likes.js" %} defer></script>
+    <script src={% static "generalApp/js/video.js" %} defer></script>
+
 
 
 
@@ -233,6 +235,9 @@
             btn.onclick = function () {
                 if (btn.classList.contains('open_post_link')) {
                     console.log("ты нажал на пост");
+                    document.querySelectorAll('.post-video').forEach(video => {
+                        video.pause();
+                    });
                     postModal.style.display = "block";
                 }
                 else {
@@ -253,6 +258,9 @@
         // Закрытие для post
         span.onclick = function () {
             postModal.style.display = "none";
+            document.querySelectorAll('.post-video').forEach(video => {
+                video.pause();
+            });
             history.back();
         }
 
@@ -262,6 +270,9 @@
         window.onclick = function (event) {
             if (event.target == postModal) {
                 postModal.style.display = "none";
+                document.querySelectorAll('.post-video').forEach(video => {
+                    video.pause();
+                });
                 history.back();
             }
             if (event.target == moreModal) {
@@ -273,5 +284,7 @@
     </script>
 
 </body>
+
+
 
 </html>

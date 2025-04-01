@@ -7,9 +7,10 @@ class Post(models.Model):
     title = models.CharField(max_length=100, blank=True, default='no title')
     image = models.ImageField(
         upload_to="users_posts_images",
-        blank=False, # ВОТ ЭТО НАДО
+        null=True, blank=True, # ВОТ ЭТО НАДО
         # default='default_photo.jpeg'
         )
+    video = models.FileField(upload_to='post_videos/', null=True, blank=True) # ВОУ ВОУ
     body = models.CharField(max_length=1024, blank=True, default='') # потом поменяем
     author = models.ForeignKey( # id автора
         User,

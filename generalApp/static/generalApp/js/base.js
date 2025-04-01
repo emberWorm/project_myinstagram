@@ -43,25 +43,7 @@ document.getElementById('notifications').addEventListener('click', function () {
 });
 
 
-// КНОПКА ЗАГРУЗКИ ИЗОБРАЖЕНИЯ
-// Получить элементы
 
-const fileInput = document.getElementById('image-input');
-const uploadButton = document.getElementById('upload-button');
-
-// Симулировать клик на кнопке ""
-uploadButton.addEventListener('click', function () {
-    fileInput.click();
-});
-
-fileInput.addEventListener('change', function () {
-    if (this.files.length > 0) {
-        uploadButton.textContent = 'File load';
-        uploadButton.classList.add('load');
-    } else {
-        uploadButton.textContent = 'Select photo';
-    }
-})
 
 // 
 // Чтобы area удлинялась

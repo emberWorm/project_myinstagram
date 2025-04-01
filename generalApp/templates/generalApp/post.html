@@ -9,7 +9,17 @@
 {% block content %}
 <div class="container" style="height: 82vh; width: 70vw; margin-top: 30px;">
     <div class="post-image">
+        {% if post.image %}
         <img src="{{ post.image.url }}" alt="">
+
+        {% endif %}
+
+        {% if post.video %}
+        <video class="modal post-video" width="200" height="150" controls="false" style="width: 100%; height: 100%;">
+            <source src="{{ post.video.url }}" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        {% endif %}
     </div>
 
     <div class="post-content">

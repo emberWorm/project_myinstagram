@@ -16,6 +16,11 @@ from datetime import datetime
 
 from django.http import HttpResponse
 
+from PIL import Image
+import subprocess
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from io import BytesIO
+
 # def base(request):
 #     q = request.GET.get("q")
 
@@ -101,6 +106,23 @@ def delete_post(request, id):
     print("///// WARNING")
     return HttpResponse()
 
+def handle_uploaded_image(image):
+    """Обрезка изображения до соотношения 1:1."""
+    img = Image.open(image)
+    width, height = img.size
+    size = min(width, height)
+    left = (width - size) / 2
+    top = (height - size) / 2
+    right = (width + size) / 2
+    bottom = (height + size) / 2
+    img = img.crop((left, top, right, bottom))
+    
+    # Сохранение обрезанного изображения
+    output = BytesIO()
+    img.save(output, format='JPEG', quality=90)
+    output.seek(0)
+    return InMemoryUploadedFile(output, 'ImageField', image.name, 'image/jpeg', output.tell(), None)
+
 
 @login_required(login_url='users:log_in')
 def create_post(request):
@@ -112,6 +134,10 @@ def create_post(request):
         
         form = forms.PostCreateForm(request.POST,request.FILES) # насколько я помню он славливает ее не сохраняя
         if form.is_valid():
+
+            if 'image' in request.FILES:
+                image_file = handle_uploaded_image(request.FILES['image'])
+                form.instance.image = image_file  # Присваиваем обработанное изображение
 
             # присваивание авторства поста
             post = form.save(commit=False)
@@ -201,3 +227,5 @@ def post_like(request, post_id):
     
 
     return JsonResponse({'likes': post_likes})
+
+

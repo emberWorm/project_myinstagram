@@ -807,10 +807,10 @@ align-items:
     padding: 20px;
     border: 1px solid #888;
     border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.base-modal-more-content-delete{
+.base-modal-more-content-delete {
     background-color: #fefefe;
     width: 100px;
     height: 100px;
@@ -818,7 +818,12 @@ align-items:
     padding: 20px;
     border: 1px solid #888;
     border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     display: none;
     z-index: 10000;
+}
+
+
+.gallery-image.post-video::-webkit-media-controls {
+    display: none;
 }

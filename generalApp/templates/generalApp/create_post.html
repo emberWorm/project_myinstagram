@@ -11,29 +11,181 @@
 <div class="main">
     <div class="div-create-form">
         <div class="header-form">
-        <h2>Создание публикации</h2>
+            <h2>Создание публикации</h2>
         </div>
 
         <div class="main-form">
+            <img class="icon" src="{% static 'generalApp/icons/gallery.png' %}" alt="gallery" style="width: 5rem;">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <img class="icon" src="{% static 'generalApp/icons/gallery.png' %}" alt="gallery" style="width: 5rem;">
                 {% for field in form %}
                 {% if field.name == 'image' %}
                 <div class="file-upload">
                     <input type="file" id="image-input" name="image" style="display: none;">
-                    <div id="upload-button" class="photo-btn">Select photo</div>
+                    <div id="image-upload-button" class="photo-btn">Select photo</div>
                 </div>
-    
-                {% else %}
-                {{ field }}
-    
+
+                {% elif field.name == 'video' %}
+                <div class="file-upload">
+                    <input type="file" id="video-input" name="video" style="display: none;">
+                    <div id="video-upload-button" class="photo-btn">Select video</div>
+                </div>
+
+                {%else%}
+                <div id="create-post-modal" class="modal-create-post-overlay">
+
+                    <span id="close-modal-create" class="close">×</span>
+                    <div class="modal-create-post-content" id="modal-create-post-content">
+
+                        <div class="head-modal">
+                            <h2>Preview</h2>
+                        </div>
+
+                        <div class="main-modal">
+                            <div class="modal-create-file">
+                                <div id="image-preview" class="preview-container"></div>
+                                <div id="video-preview" class="preview-container"></div>
+
+                            </div>
+                            <div class="create-desc">
+                                <h3>Description your post</h3>
+                                {{ field }}
+                                <input type="submit" value="Publish" class="photo-btn publish">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
                 {% endif %}
                 {% endfor %}
-                <input type="submit" value="Publish">
             </form>
         </div>
 
     </div>
 </div>
+
+
+
+<style>
+    .preview-container {
+        margin-top: 10px;
+        max-width: 300px;
+    }
+
+    .preview-container img,
+    .preview-container video {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+</style>
+
+<script>
+    const createModal = document.getElementById("create-post-modal");
+
+    const spanCloseCreate = document.getElementById("close-modal-create");
+
+    spanCloseCreate.onclick = function () {
+        createModal.style.display = "none";
+    }
+    // Закрытие при клике вне окна
+    window.onclick = function (event) {
+        if (event.target == createModal) {
+            createModal.style.display = "none";
+        }
+    }
+
+    document.getElementById('image-input').addEventListener('change', function (event) {
+
+        createModal.style.display = "block"; // модалка
+
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.src = e.target.result;
+
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Определяем размеры для обрезки
+                    const size = Math.min(img.width, img.height);
+                    canvas.width = size;
+                    canvas.height = size;
+
+                    // Обрезаем изображение
+                    ctx.drawImage(
+                        img,
+                        (img.width - size) / 2,
+                        (img.height - size) / 2,
+                        size,
+                        size,
+                        0,
+                        0,
+                        size,
+                        size
+                    );
+
+                    // Отображаем обрезанное изображение
+                    const preview = document.getElementById('image-preview');
+                    preview.innerHTML = '';
+                    const previewImg = document.createElement('img');
+                    previewImg.src = canvas.toDataURL();
+                    previewImg.style.width = '100%';
+                    previewImg.style.height = 'auto';
+                    preview.appendChild(previewImg);
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Для фото
+    document.getElementById('image-upload-button').addEventListener('click', function () {
+        document.getElementById('image-input').click();
+    });
+
+    // document.getElementById('image-input').addEventListener('change', function () {
+    //     const file = this.files[0];
+    //     const reader = new FileReader();
+
+    //     reader.onload = function (e) {
+    //         const img = document.createElement('img');
+    //         img.src = e.target.result;
+    //         document.getElementById('image-preview').innerHTML = '';
+    //         document.getElementById('image-preview').appendChild(img);
+    //     };
+    //     reader.readAsDataURL(file);
+    // });
+
+    // Для видео
+    document.getElementById('video-upload-button').addEventListener('click', function () {
+        document.getElementById('video-input').click();
+    });
+
+    document.getElementById('video-input').addEventListener('change', function () {
+
+        createModal.style.display = "block"; // модалка
+
+
+        const file = this.files[0];
+        const url = URL.createObjectURL(file);
+        const video = document.createElement('video');
+        video.src = url;
+        video.controls = false;
+        video.muted = true;
+        video.loop = true;
+        video.autoplay = true;
+
+        document.getElementById('video-preview').innerHTML = '';
+        document.getElementById('video-preview').appendChild(video);
+    });
+
+
+</script>
 {% endblock %}

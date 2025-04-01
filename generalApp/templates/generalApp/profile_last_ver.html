@@ -72,7 +72,16 @@
 
                     <a href="{% url 'generalApp:view_post' post.pk %}" class="open_post_link" data-post-id="{{ post.pk }}">
 
+                        {% if post.image %}
                         <img src="{{ post.image.url }}" class="gallery-image" alt="">
+                        {% endif %}
+            
+                        {% if post.video %}
+                        <video width="200" height="150" controls class="gallery-image post-video">
+                            <source src="{{ post.video.url }}" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                        {% endif %}
 
                         <div class="gallery-item-info">
 

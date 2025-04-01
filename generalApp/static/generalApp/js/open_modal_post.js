@@ -24,6 +24,7 @@ document.querySelectorAll('.open_post_link').forEach(link => {
         modalContent.innerHTML = response_content;
 
 
+
         // Получаем данные из data-атрибутов
         const postAuthorId = modalContent.querySelector('.modal-post-content').dataset.authorId;
         const currentUserId = modalContent.querySelector('.modal-post-content').dataset.userId;
