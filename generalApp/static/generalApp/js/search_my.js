@@ -1,6 +1,20 @@
 document.getElementById('search').addEventListener('click', function () {
+    
+    const extraBar = document.getElementById('extra-bar');
+    
+    const imgSearch = document.getElementById('img-search')
 
-    document.getElementById('extra-bar').classList.toggle('active');
+    const boldSearchSrc = imgSearch.dataset.boldSearch;
+    const simpleSearchSrc = imgSearch.dataset.simpleSearch;
+
+
+    // открываем бар
+    extraBar.classList.toggle('active');
+
+    extraBar.classList.contains('active') 
+    ? imgSearch.src = boldSearchSrc
+    : imgSearch.src = simpleSearchSrc;
+
     document.getElementById('main-sidebar').classList.toggle('add-extra-bar');
     console.log('КЛИК');
     document.getElementById('extra-container').innerHTML = `
@@ -25,7 +39,7 @@ document.getElementById('search').addEventListener('click', function () {
         console.log('Запрос отправлен');
 
         // сделать дебаунс
-        fetch(`http://127.0.0.1:8000/api/1/?param=${query_input}`) // localhost:8000 - CORS?
+        fetch(`http://127.0.0.1:8000/api/search/?param=${query_input}`) // localhost:8000 - CORS?
         .then(response => response.json())
         // .then(data => console.log(data))
         .then(data => {

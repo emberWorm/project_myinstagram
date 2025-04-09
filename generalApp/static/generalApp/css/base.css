@@ -827,3 +827,61 @@ align-items:
 .gallery-image.post-video::-webkit-media-controls {
     display: none;
 }
+
+.notifications-results{
+    margin: 0;
+}
+
+.notification-profile {
+    display: flex;
+    /* border: 1px solid black; */
+    /* width: 30vw; */
+    width: 350px;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 20px;
+    padding: 10px;
+}
+.notification-profile:hover{
+    background-color: #e3e3e3;
+    cursor: pointer;
+}
+
+.n-avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    /* сохранение соотношения сторон */
+    object-fit: cover;
+    /* border: 1px solid var(--link-grey); */
+    justify-content: space-between;
+}
+
+.n-preview {
+    height: 3rem;
+    width: 3rem;
+    position: relative;
+
+}
+
+.image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.n-text{
+    display: flex;
+    /* align-items: center; */
+    width: 200px;
+}
+
+.on-img{
+    position: absolute; /* Абсолютное позиционирование для наложения */
+    bottom: -8px;
+    left: -8px;
+    /* width: 100%; */
+    /* height: 100%; */
+    height: 23px;
+}

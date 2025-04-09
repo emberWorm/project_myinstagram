@@ -31,17 +31,6 @@ document.getElementById('more').addEventListener('click', function () {
 
 // });
 
-document.getElementById('notifications').addEventListener('click', function () {
-
-    document.getElementById('extra-bar').classList.toggle('active');
-    document.getElementById('main-sidebar').classList.toggle('add-extra-bar');
-    console.log('КЛИК');
-    document.getElementById('extra-container').innerHTML = `<h2>Notifications</h2>`;
-
-    
-
-});
-
 
 
 

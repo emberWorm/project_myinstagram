@@ -23,7 +23,9 @@
     <script src={% static "generalApp/js/search_my.js" %} defer></script>
     <script src={% static "generalApp/js/open_modal_post.js" %} defer></script>
     <script src={% static "generalApp/js/likes.js" %} defer></script>
-    <script src={% static "generalApp/js/video.js" %} defer></script>
+    <!-- <script src={% static "generalApp/js/video.js" %} defer></script> -->
+    <script src={% static "generalApp/js/notifications.js" %} defer></script>
+
 
 
 
@@ -65,7 +67,9 @@
                     <div class="link" id="search">
 
                         <img id="img-search" src="{% static 'generalApp/icons/search.png' %}"
-                            style="height: 2rem; margin-right: 0.6rem;">
+                            style="height: 2rem; margin-right: 0.6rem;"
+                            data-simple-search="{% static 'generalApp/icons/search.png' %}" 
+                            data-bold-search="{% static 'generalApp/icons/search_bold.png' %}">
 
                         <a href="#">Search</a>
                     </div>
@@ -96,7 +100,9 @@
 
                     <div class="link" id="notifications">
                         <img id="img-heart" src="{% static 'generalApp/icons/heart.png' %}"
-                            style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
+                            style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;"
+                            data-black-heart="{% static 'generalApp/icons/heart_black.png' %}"
+                            data-simple-heart="{% static 'generalApp/icons/heart.png' %}">
                         <a href="#">Notifications</a>
                     </div>
 
@@ -145,7 +151,7 @@
         </div>
 
         <div id="extra-bar" class="extra-bar">
-            <div class="extra-container" id="extra-container">
+            <div class="extra-container" id="extra-container" data-like="{% static 'generalApp/icons/like_all_red.png' %}">
 
             </div>
         </div>

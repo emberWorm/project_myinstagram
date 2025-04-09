@@ -153,16 +153,17 @@ img {
     transition: 0.1s;
 }
 
-.profile-edit-btn:hover{
+.profile-edit-btn:hover {
     background-color: #c0c0c0;
 }
 
 .follow {
-	color: #fff;	
+    color: #fff;
     background-color: #3897f0;
     border: 1px solid #3897f0;
 }
-.follow:hover{
+
+.follow:hover {
     background-color: #077ce9;
 }
 
@@ -256,7 +257,8 @@ img {
 }
 
 .gallery-item-info {
-    display: none;;
+    display: none;
+    ;
 }
 
 .gallery-item-info li {
@@ -268,6 +270,7 @@ img {
 .gallery-item-likes {
     margin-right: 2.2rem;
 }
+
 .gallery-item-comments {
     margin-right: 2.5rem;
 }
@@ -412,6 +415,15 @@ img {
 
     .profile-image {
         grid-row: 1 / -1;
+    }
+
+    /* изи */
+    .gallery-item {
+        aspect-ratio: 1 / 1;
+        /* Соотношение сторон 1:1 */
+        width: 100%;
+        object-fit: cover;
+        /* Обрезка по размеру */
     }
 
     .gallery {

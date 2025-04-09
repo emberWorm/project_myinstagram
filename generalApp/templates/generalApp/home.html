@@ -26,8 +26,6 @@
 
 
     </div>
-
-
     <!-- posts -->
     <div class="posts-container">
 
@@ -39,7 +37,8 @@
 
                     <img src="{{ post.author.userprofile.avatar.url }}" alt="Фото профиля" class="profile-pic"
                         data-url="{% url 'usersApp:user_prof' post.author.username %}">
-
+                        
+                        
                     <p class="obj-click" data-url="{% url 'usersApp:user_prof' post.author.username %}">{{ post.author}}
                     </p>
                     <ul>

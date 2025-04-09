@@ -9,13 +9,16 @@
 
     /* min-height: 100vh; */
 
-    height: 80vh;
-    overflow-x: hidden;
-
+    /* height: 80vh; */
     display: flex;
     align-items: center;
+    height: 80%;
 }
 
+.main-container{
+    overflow: hidden !important;
+
+}
 
 .div-create-form {
     display: flex;
@@ -25,14 +28,26 @@
     border-radius: 20px;
 
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: center; */
+    /* justify-content: space-between; */
 
     width: 30vw;
-    height: 67vh;
+    height: 50vh;
+}
+
+.header-form{
+    border-bottom: 1px solid gainsboro;
 }
 
 .main-form {
-    margin: auto;
+    /* margin: auto; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+
 }
 
 .icon {
@@ -93,8 +108,8 @@
 
 .modal-create-post-content {
     background-color: #fefefe;
-    width: 40vw;
-    height: 45vh;
+    width: 50vw;
+    /* height: 45vh; */
     margin: 10% auto;
     /* padding: 20px; */
     border: 1px solid #888;

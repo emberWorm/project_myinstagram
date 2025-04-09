@@ -29,7 +29,8 @@
                         <p>{{ user.username }}</p>
                     </div>
                     {% if user == request.user %}
-                    <a href="{% url 'usersApp:profile_edit' user.username %}" class="btn profile-edit-btn">Edit Profile</a>
+                    <a href="{% url 'usersApp:profile_edit' user.username %}" class="btn profile-edit-btn">Edit
+                        Profile</a>
                     <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
                             aria-hidden="true"></i></button>
                     {% else %}
@@ -70,17 +71,26 @@
                 {% for post in posts_user %}
                 <div class="gallery-item" tabindex="0">
 
-                    <a href="{% url 'generalApp:view_post' post.pk %}" class="open_post_link" data-post-id="{{ post.pk }}">
+                    <a href="{% url 'generalApp:view_post' post.pk %}" class="open_post_link"
+                        data-post-id="{{ post.pk }}">
 
                         {% if post.image %}
                         <img src="{{ post.image.url }}" class="gallery-image" alt="">
                         {% endif %}
-            
+
                         {% if post.video %}
                         <video width="200" height="150" controls class="gallery-image post-video">
                             <source src="{{ post.video.url }}" type="video/mp4">
                             Ваш браузер не поддерживает видео.
                         </video>
+
+                        <div class="gallery-item-type">
+
+                            <span class="visually-hidden">Video</span>
+                            <!-- <img src="{% static 'generalApp/icons/cam-recorder1.png' %}" style="height: 4rem; width: 3.5rem;" alt=""> -->
+                            <i class="fas fa-video" aria-hidden="true"></i>
+
+                        </div>
                         {% endif %}
 
                         <div class="gallery-item-info">

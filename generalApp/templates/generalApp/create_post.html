@@ -11,11 +11,12 @@
 <div class="main">
     <div class="div-create-form">
         <div class="header-form">
-            <h2>Создание публикации</h2>
+            <h2>Create new post</h2>
         </div>
-
         <div class="main-form">
             <img class="icon" src="{% static 'generalApp/icons/gallery.png' %}" alt="gallery" style="width: 5rem;">
+            <h4 style="color: rgb(143, 139, 139);">Drop photos or videos here</h4>
+
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% for field in form %}
@@ -45,6 +46,7 @@
                             <div class="modal-create-file">
                                 <div id="image-preview" class="preview-container"></div>
                                 <div id="video-preview" class="preview-container"></div>
+                                <div id="video-caption" style="font-size: 12px; color: burlywood; text-align: center; margin-top: 10px;"></div>
 
                             </div>
                             <div class="create-desc">
@@ -184,6 +186,7 @@
 
         document.getElementById('video-preview').innerHTML = '';
         document.getElementById('video-preview').appendChild(video);
+        document.getElementById('video-caption').textContent = 'The uploaded video will keep the ratio';
     });
 
 
