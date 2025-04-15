@@ -17,9 +17,15 @@ from datetime import datetime
 from django.http import HttpResponse
 
 from PIL import Image
+
+import json
+import itertools
+
+
 # import subprocess
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from io import BytesIO
+from django.shortcuts import get_object_or_404
 
 # def base(request):
 #     q = request.GET.get("q")
@@ -35,8 +41,27 @@ from io import BytesIO
 def home(request):
     all_posts = models.Post.objects.all().order_by("-when_added")
 
+    # posts_followed_users = models.Post.objects.filter(author=request.user.following )
+    # posts_followed_users = models.Post.objects.filter(author__in=[f.following for f in request.user.following.all()])
+
+    users_not_followed = models.User.objects.exclude(id__in=request.user.following.values('to_user')).order_by("?")
+    users_not_followed_slice = users_not_followed[:3]
+
+    users_followed_ids= models.User.objects.filter(id__in = request.user.following.values('to_user'))
+    # request.user.following.values('to_user') словарь с ключом to_user
+    ids_plus_req_user = list(users_followed_ids) + [request.user.id]
+    posts_followed_users = models.Post.objects.filter(author__in=ids_plus_req_user).order_by("-when_added")
+
+    liked_post_ids = models.Like.objects.filter(
+        user=request.user,
+        post__in=posts_followed_users
+    ).values_list('post_id', flat=True)
+
     context = {
-        "all_posts": all_posts,
+        "all_posts": posts_followed_users,
+        'users_followed':users_followed_ids,
+        'liked_post_ids':liked_post_ids,
+        'users_not_followed_slice':users_not_followed_slice,
     }
 
     return render(request, "generalApp/home.html", context)
@@ -86,9 +111,12 @@ def insta_post(request, pk):
 
     # print(time_diff)
 
+    is_liked = models.Like.objects.filter(user=request.user, post=my_post).exists()
+    
     context = {
         "post": my_post,
         "time_display": time_display,
+        'is_liked':is_liked,
     }
     return render(request, template, context)
 
@@ -229,12 +257,20 @@ def get_data_search(request):
 def post_like(request, post_id):
     post_data = models.Post.objects.get(pk=post_id)
 
-    if request.user not in post_data.likes.all():
-        post_data.likes.add(request.user)
-    elif request.user in post_data.likes.all():
-        post_data.likes.remove(request.user)
+    # if request.user not in post_data.likes.all():
 
-    post_likes = post_data.likes.count()
+    #     post_data.likes.add(request.user)
+    # elif request.user in post_data.likes.all():
+    #     post_data.likes.remove(request.user)
+
+    like_obj, created = models.Like.objects.get_or_create(
+        user=request.user, post=post_data
+    )
+
+    if not created:
+        like_obj.delete()
+
+    post_likes = post_data.like_set.count()
 
     return JsonResponse({"likes": post_likes})
 
@@ -242,49 +278,160 @@ def post_like(request, post_id):
 def notifications(request):
     # user = request.user
     # TypeError: Object of type User is not JSON serializable
-    user = request.user
+    # user = request.user
     # posts_user = models.Post.likes.all()
 
-    through_table = models.Post.likes.through
-    fields = [field.name for field in through_table._meta.fields]
-    print("Поля промежуточной таблицы:", fields)
+    # fields = [field.name for field in through_likes_table._meta.fields]
+    # print("Поля промежуточной таблицы:", fields)
 
-    table_objects = through_table.objects.all()
-    for obj in table_objects:
-        print(
-            f"запись {obj.id} пользователь {obj.user} лайкнул пост {obj.post} автора {obj.post.author}"
-        )
+    # table_objects = through_likes_table.objects.all()
+    # for obj in table_objects:
+    #     print(
+    #         f"запись {obj.id} пользователь {obj.user} лайкнул пост {obj.post} автора {obj.post.author}"
+    #     )
 
-    print("///////////////")
+    # print("///////////////")
 
-    author_objects = through_table.objects.filter(
-        post__author__username=request.user.username
-    )  # ну или author = user obj
+    # comments_table = models.Comment.objects.filter(post_)
+
+    # author_objects = through_likes_table.objects.filter(
+    #     post__author__username=request.user.username
+    # )  # ну или author = user obj
 
     # вы пытаетесь post.author, но post — это поле ЧЕРЕЗ-таблицы, а не объект поста. Правильно использовать post__author.
-    for obj in author_objects:
-        # print(f'запись {obj.id} пользователь {obj.user} лайкнул пост {obj.post} автора ')
-        print(obj.id, obj.user, obj.post.id)
+    # for obj in author_objects:
+
+    # print(f'запись {obj.id} пользователь {obj.user} лайкнул пост {obj.post} автора ')
+    # print(obj.id, obj.user, obj.post.id)
+
     # fields = [field.name for field in author_objects.fields]
     # print(fields)
 
-    notif_results = [
-        {
-            "username": like_event.user.username,
-            "user_avatar_url":like_event.user.userprofile.avatar.url,
-            "id_post": like_event.post.id,
-            "thumbnail_url": like_event.post.thumbnail,
-            # **(
-            #     {"post_image_url": like_event.post.image.url} if like_event.post.image # and like_event.post.image.url
-            #     else ({"post_video_url": like_event.post.video.url}  # if like_event.post.video and like_event.post.video.url else {}
-            #     )
-            # ),
-        }
-        for like_event in author_objects
-    ]
+    req_user_followers = list(models.Followers.objects.filter(to_user=request.user))
 
-    # print(notif_results)
-    for result in notif_results:
-        print(result)
+    req_user_comment = list(models.Comment.objects.filter(post__author=request.user))
 
-    return JsonResponse({"likes_event": notif_results})
+    req_user_likes = list(models.Like.objects.filter(post__author=request.user))
+
+    all_event_objects = itertools.chain(
+        req_user_followers, req_user_comment, req_user_likes
+    )
+
+    print(all_event_objects)
+
+    sort_obj_data = sorted(all_event_objects, key=lambda x: x.when_added, reverse=True)
+
+    print(sort_obj_data)
+
+    serialized_events = []
+    for event in sort_obj_data:
+        if isinstance(event, models.Followers):
+            serialized_events.append(
+                {
+                    "type": "follow",
+                    "user": event.from_user.username,
+                    "avatar_url": event.from_user.userprofile.avatar.url,
+                    "date": event.when_added,
+                    "message": f"started following you.",
+                }
+            )
+        elif isinstance(event, models.Comment):
+            serialized_events.append(
+                {
+                    "type": "comment",
+                    "user": event.author.username,
+                    "avatar_url": event.author.userprofile.avatar.url,
+                    "post_id": event.post.id,
+                    "thumbnail_url": event.post.thumbnail,
+                    "text": event.body[:20],
+                    "date": event.when_added,
+                    "message": f'commented on your post: {event.body[:20]}...',
+                }
+            )
+        elif isinstance(event, models.Like):
+            serialized_events.append(
+                {
+                    "type": "like",
+                    "user": event.user.username,
+                    "avatar_url": event.user.userprofile.avatar.url,
+                    "post_id": event.post.id,
+                    "thumbnail_url": event.post.thumbnail,
+                    "date": event.when_added,
+                    "message": f'liked your post.',
+                }
+            )
+
+    return JsonResponse({"events": serialized_events})
+
+
+def create_comment(request):
+    body_comment = request.POST.get("comment_text")
+    author = request.user
+    post_id_from_ajax = request.POST.get("postID")
+    post = get_object_or_404(models.Post, id=post_id_from_ajax)
+
+    # actual_comments = post.comment_set.all()
+    # серка комментов
+    # comments_data = [{'id': c.id, 'body': c.body, 'author': c.author.username}
+    # for c in actual_comments]
+
+    # body post author when
+    insert_comment_object = models.Comment.objects.create(
+        body=body_comment, post=post, author=author
+    )
+
+    insert_comment_dict = {
+        "id": insert_comment_object.id,
+        "avatar_url": insert_comment_object.author.userprofile.avatar.url,
+        "body": insert_comment_object.body,
+        "author": insert_comment_object.author.username,
+    }
+
+    a = [field.name for field in insert_comment_object._meta.get_fields()]
+
+    return JsonResponse(
+        {"на сервер пришло сообщение": a, "insert_comment": insert_comment_dict}
+    )
+
+
+def make_follow(request):
+    data = json.loads(request.body)
+    to_user_id = data.get("user_id")
+
+    req_user = request.user
+
+    user_to_follow = get_object_or_404(models.User, id=to_user_id)
+
+    # if req_user not in user_to_follow.to_user.all(): что не так было?
+    # ------------>
+    # user_to_follow.followers.all() возвращает объекты Followers, а не пользователей.
+    # Вы сравниваете объект User (req_user) с объектами Followers → условие всегда истинно.
+    # ------------
+
+    # if not models.Followers.objects.filter(from_user=req_user, to_user=user_to_follow).exists():
+    #     models.Followers.objects.create(from_user=req_user, to_user=user_to_follow)
+    #     return JsonResponse({f'Подписка from id {req_user.id} to id {to_user_id}': "Follow Успешно"})
+    # else:
+    #     models.Followers.objects.filter(from_user=req_user, to_user=user_to_follow).delete()
+    #     return JsonResponse({f'Подписка from id {req_user.id} to id {to_user_id}': "Follow Удалена поскольку exists"})
+
+    """Более современный вариант get_or_create - 1 запрос вместо 2х к бд"""
+    follow_obj, created = models.Followers.objects.get_or_create(
+        from_user=req_user, to_user=user_to_follow
+    )
+
+    if created:
+        return JsonResponse(
+            {
+                f"Подписка from id {req_user.id} to id {to_user_id}": "Успешно",
+                "Follow": "True",
+            }
+        )
+    else:
+        follow_obj.delete()
+        return JsonResponse(
+            {
+                f"Подписка from id {req_user.id} to id {to_user_id}": "Удалена поскольку exists",
+                "Follow": "False",
+            }
+        )

@@ -23,35 +23,6 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         null=True, blank=True, default=None)
     when_added = models.DateTimeField(default=datetime.now)
-    likes = models.ManyToManyField(User, related_name='likes', blank=True)
-
-    # @property
-    # def thumbnail(self):
-    #     # Проверяем кэш
-    #     # if cached := cache.get(f'post_{self.id}_thumb'):
-    #         # return cached
-
-    #     # Генерируем и сохраняем в кэш
-    #     thumbnail_url = self._generate_thumbnail()
-    #     # cache.set(f'post_{self.id}_thumb', thumbnail_url, 3600*24)  # Кэш на 24 часа
-    #     return thumbnail_url
-
-    # def _generate_thumbnail(self):
-    #     if self.image:
-    #         return self.image.url
-
-    #     print('///////////////////////')
-    #     # Для видео
-    #     print(cv2.__version__)
-
-    #     cap = cv2.VideoCapture(self.video.path)
-    #     success, frame = cap.read()
-    #     if success:
-    #         # Сохраняем миниатюру в media/thumbnails
-    #         thumb_path = f'thumbnails/{self.video.name}_thumb.jpg'
-    #         cv2.imwrite(thumb_path, frame)
-    #         return f'/media/{thumb_path}'
-    #     return f'/static/generalApp/default_thumb.jpg'
 
     @property
     def thumbnail(self):
@@ -60,11 +31,7 @@ class Post(models.Model):
         # if not hasattr(self, '_thumbnail_url'):
         #     print(f"ГЕНЕРАЦИЯ ДЛЯ ОБЪЕКТА {id(self)}")
         #     """! объекты моделей в Django создаются заново при каждом запросе !"""
-
-                    # # print(dir(self))
-            # print('ГЕНЕРАЦИЯ МИНИАТЮРЫ')
-            # # self._thumbnail_url = self._generate_thumbnail()
-
+        
         if self.image:
             return self.image.url
         
@@ -106,26 +73,31 @@ class Post(models.Model):
             return f'{settings.MEDIA_URL}thumbnails/{thumb_name}'
 
 class Followers(models.Model):
-    # айдишник подписки (или как?)
+
     from_user = models.ForeignKey(# id юзера от
         User,
-        related_name='from_user',
-        on_delete=models.CASCADE,
-        null=True, blank=True, default=None)
+        related_name='following',
+        on_delete=models.CASCADE)
 
     to_user = models.ForeignKey(# id юзера за кем наблюдаем (follow)
         User,
-        related_name='to_user',
-        on_delete=models.CASCADE,
-        null=True, blank=True, default=None)
+        related_name='followers',
+        on_delete=models.CASCADE)
     
     when_added = models.DateTimeField(default=datetime.now)
 
     class Meta:
+        unique_together = ('from_user', 'to_user') 
         db_table = 'Followers'
         verbose_name = 'FollOOWWWERRS'
 
-# class Comment(models.Model):
-#     body = models.TextField()
-#     when_added = models.DateTimeField(default=datetime.now)
-#     author = models.ForeignKey(User)
+class Comment(models.Model):
+    body = models.TextField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    when_added = models.DateTimeField(default=datetime.now)
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    when_added = models.DateTimeField(default=datetime.now)

@@ -23,13 +23,13 @@
         <div class="modal-post-header">
             <div class="post-info-flex"> 
                 <!-- в бейсзе -->
-                <img src="{{ post.author.userprofile.avatar.url }}" data-url="{% url 'usersApp:user_prof' post.author.username %}" alt="Фото профиля" class="modal-profile-pic">
-                <span class="modal-username">{{post.author}}</span>
+                <img src="{{ post.author.userprofile.avatar.url }}" data-url="{% url 'usersApp:user_prof' post.author.username %}" id="url-pic" alt="Фото профиля" class="modal-profile-pic obj-click">
+                <span class="modal-username" data-url="{% url 'usersApp:user_prof' post.author.username %}">{{post.author}}</span>
             </div>
             <img class="post-icon" id="open_more_post_link" src="{% static 'generalApp/icons/moree.png' %}" style="height: 1.3rem;">
         </div>
 
-        <div class="comments-section">
+        <div class="comments-section" id="comments-section">
 
             {% if post.body %}
             <div class="modal-comment">
@@ -43,10 +43,11 @@
                     <span class="comment-username">{{post.author}}</span>
                     <!-- <div class="comment-text"></div> -->
                     {{post.body}}
-                    <div style="color: #8e8e8e;">1d Reply</div>
+                    <div style="color: #8e8e8e;">1d <span class="reply">Reply</span></div>
                 </div>
             </div>
             {% endif %}
+
 
             <div class="modal-comment">
                 <div>
@@ -54,7 +55,7 @@
                 </div>
                 <div class="comment-info">
                     <span class="comment-username">pullheriba</span>
-                    приехал на родину...
+                    adipisicing elit.
                     <div style="color: #8e8e8e;">1d Reply</div>
                 </div>
             </div>
@@ -72,12 +73,24 @@
                 </div>
             </div>
 
-            <div class="comment">
-                <div class="comment-info" style="color: #8e8e8e;">
-                    View hidden comments
+            {% for comment in post.comment_set.all %}
+            <div class="modal-comment">
+                <div>
+                    <img src="{{comment.author.userprofile.avatar.url}}" class="avatar" alt="Avatar">
+                </div>
+                <div class="comment-info">
+                    <span id="username" class="comment-username">{{comment.author}}</span>
+                    {{comment.body}}
+                    <div  style="color: #8e8e8e;">{{comment.when_added}} <span data-username="{{comment.author}}" class="reply">Reply</span></div>
                 </div>
             </div>
+            {% endfor %}
         </div>
+        <!-- <div class="comment">
+            <div class="comment-info" style="color: #8e8e8e;">
+                View hidden comments
+            </div>
+        </div> -->
 
         <!-- <div class="post-actions">
             <button class="action-btn">❤️</button>
@@ -88,7 +101,7 @@
         <div class="modal-post-icons">
             <div class="modal-post-icons-left">
                 <img class="post-icon img-like" 
-                src="{% if user in post.likes.all %}
+                src="{% if is_liked %}
                 {% static 'generalApp/icons/heart_red.png' %}
                 {% else %}
                 {% static 'generalApp/icons/heart.png' %}
@@ -104,13 +117,16 @@
             <img class="post-icon" src="{% static 'generalApp/icons/bookmark.png' %}" style="height: 1.4rem;" alt="">
         </div>
         <!-- <div style="font-size: 14px; margin-bottom: 5px;" class="likes-count"><b>12,900 likes</b></div> -->
-        <p class="likes" style="font-size: 14px; font-weight: bold;"><span class="likes-count">{{ post.likes.count|add:350 }} </span> likes</p>
+        <p class="likes" style="font-size: 14px; font-weight: bold;"><span class="likes-count">{{ post.like_set.count|add:350 }} </span> likes</p>
         <span style="font-size: 12px; margin-bottom: 10px; color: grey;">{{time_display}}</span>
 
 
-        <form class="modal-comment-form">
-            <input type="text" class="comment-input" placeholder="Add a comment...">
+        <form class="modal-comment-form" id="comment-form">
+            {% csrf_token %}
+            <input type="hidden" name="postID" value="{{post.id}}">
+            <input id="comment-input" type="text" name="comment_text" class="comment-input" placeholder="Add a comment..." required autocomplete="off">
             <button type="submit" class="post-btn">Post</button>
         </form>
     </div>
 </div>
+

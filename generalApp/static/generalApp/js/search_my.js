@@ -1,19 +1,31 @@
 document.getElementById('search').addEventListener('click', function () {
-    
-    const extraBar = document.getElementById('extra-bar');
-    
-    const imgSearch = document.getElementById('img-search')
 
-    const boldSearchSrc = imgSearch.dataset.boldSearch;
-    const simpleSearchSrc = imgSearch.dataset.simpleSearch;
-
+    ///// Search Bar
 
     // открываем бар
+    const extraBar = document.getElementById('extra-bar');
     extraBar.classList.toggle('active');
+
+    // меняем иконку search
+    const imgSearch = document.getElementById('img-search')
+    const boldSearchSrc = imgSearch.dataset.boldSearch;
+    const simpleSearchSrc = imgSearch.dataset.simpleSearch;
 
     extraBar.classList.contains('active') 
     ? imgSearch.src = boldSearchSrc
     : imgSearch.src = simpleSearchSrc;
+
+    ////////////////////// если icon notif black = change
+    const imgHeart = document.getElementById('img-heart');
+    const blackHeartSrc = imgHeart.dataset.blackHeart;
+    const simpleHeartSrc = imgHeart.dataset.simpleHeart;
+
+    imgHeart.src.includes(blackHeartSrc) ? imgHeart.src = simpleHeartSrc : imgHeart.src
+    // ? console.log('СЕРДЦЕ ЧЕРНОЕ')
+    // ? imgHeart.src = simpleHeartSrc
+    // : console.log(`СЕРДЦЕ БЕЛОЕ${imgHeart.src}\n${blackHeartSrc}`)
+    // : imgHeart.src = blackHeartSrc;
+    ///////////////////////
 
     document.getElementById('main-sidebar').classList.toggle('add-extra-bar');
     console.log('КЛИК');

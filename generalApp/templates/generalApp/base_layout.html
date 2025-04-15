@@ -25,11 +25,14 @@
     <script src={% static "generalApp/js/likes.js" %} defer></script>
     <!-- <script src={% static "generalApp/js/video.js" %} defer></script> -->
     <script src={% static "generalApp/js/notifications.js" %} defer></script>
+    <script src={% static "generalApp/js/create_comment.js" %} defer></script>
+    <script src={% static "generalApp/js/reply.js" %} defer></script>
+    <script src={% static "generalApp/js/follow.js" %} defer></script>
 
 
 
 
-
+    <meta name="csrf-token" content="{{ csrf_token }}">
 </head>
 
 <body>
@@ -85,18 +88,18 @@
                         <a {% if request.path == '/explore/' %} class="bold" {% else %}{% endif %} href="#">Explore</a>
                     </div>
 
-                    <div class="link">
+                    <!-- <div class="link">
 
                         <img id="img-reels" src="{% static 'generalApp/icons/reels.png' %}"
                             style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
                         <a href="#">Reels</a>
-                    </div>
+                    </div> -->
 
-                    <div class="link">
+                    <!-- <div class="link">
                         <img id="img-direct" src="{% static 'generalApp/icons/direct.png' %}"
                             style="height: 1.7rem; margin-right: 0.7rem; margin-left: 0.3rem;">
                         <a href="#">Messages</a>
-                    </div>
+                    </div> -->
 
                     <div class="link" id="notifications">
                         <img id="img-heart" src="{% static 'generalApp/icons/heart.png' %}"
@@ -149,12 +152,13 @@
             </div>
 
         </div>
-
+        <!-- extra bar -->
         <div id="extra-bar" class="extra-bar">
             <div class="extra-container" id="extra-container" data-like="{% static 'generalApp/icons/like_all_red.png' %}">
 
             </div>
         </div>
+
 
     </div>
 
@@ -207,11 +211,11 @@
     <div id="moreModal" class="base-modal-more-overlay">
 
         <div class="base-modal-more-content" id="base-modal-more-content">
-            находится в разработке
+            находится в разработке <img src="{% static 'generalApp/icons/loading.gif' %}" style="height: 2rem;">
         </div>
 
         <div class="base-modal-more-content-delete" id="base-modal-more-content-delete">
-            вы точно хотите?
+            <p>вы точно хотите?</p>
             <button id="confirm-delete">да</button>
             <button id="cancel-detele">нет</button>
         </div>

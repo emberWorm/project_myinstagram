@@ -14,5 +14,6 @@ urlpatterns = [
     path('post/<int:id>/delete/', views.delete_post, name="delete_post"),
     path('post_like/<int:post_id>/', views.post_like, name="post_like"),
     path('api/notifications/', views.notifications),
-
+    path('api/create_comment/', views.create_comment),
+    path('api/make_follow/', views.make_follow)
 ]

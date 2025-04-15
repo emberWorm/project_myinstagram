@@ -21,8 +21,7 @@ document.querySelectorAll('.open_post_link').forEach(link => {
 
         // обновляем модалку
         const modalContent = document.getElementById('base-modal-post-content');
-        modalContent.innerHTML = response_content;
-
+        modalContent.innerHTML = response_content
 
 
         // Получаем данные из data-атрибутов
@@ -77,7 +76,7 @@ document.querySelectorAll('.open_post_link').forEach(link => {
             if (response.ok) {
                 // Если запрос успешен, перенаправляем пользователя
                 window.location.href = "/";  // Перенаправление на главную страницу
-            } 
+            }
 
 
             console.log(response);
@@ -101,7 +100,7 @@ document.querySelectorAll('.open_post_link').forEach(link => {
         // pushState() для реализации SPA (Single Page Applications), 
         // динамически изменять URL и управлять состоянием приложения без полной перезагрузки страниц.
         // const moreModal = document.getElementById("moreModal");
- 
+
 
 
         // request.user.id === post.author.id ?
@@ -131,6 +130,14 @@ document.querySelectorAll('.open_post_link').forEach(link => {
         //         </div>
         //     `;
 
+        document.getElementById('url-pic').addEventListener('click', function (event) {
+            console.log('переходик');
+            
+            window.location.href = event.target.dataset.url;
+        })
+
+
     });
+
 
 });

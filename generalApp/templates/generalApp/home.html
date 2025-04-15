@@ -11,24 +11,27 @@
 <div class="story-post-container">
     <!-- stories -->
     <div class="stories-container">
+        {% for user in users_followed %}
         <div class="story">
+            <div class="gradient-border">
+                <img src="{{user.userprofile.avatar.url}}" alt=""
+                    data-url="{% url 'usersApp:user_prof' user.username %}" class="obj-click">
+            </div>
+            <p>{{user.username}}</p>
+        </div>
+        {% endfor %}
+        <!-- <div class="story">
             <div class="gradient-border">
                 <img src="{% static 'generalApp/icons/man62.png' %}" alt="">
             </div>
             <p>Username</p>
-        </div>
-        <div class="story">
-            <div class="gradient-border">
-                <img src="{% static 'generalApp/icons/man62.png' %}" alt="">
-            </div>
-            <p>Username</p>
-        </div>
+        </div> -->
 
 
     </div>
     <!-- posts -->
     <div class="posts-container">
-
+        {% if all_posts %}
         {% for post in all_posts %}
 
         <div class="post">
@@ -37,8 +40,8 @@
 
                     <img src="{{ post.author.userprofile.avatar.url }}" alt="Фото профиля" class="profile-pic"
                         data-url="{% url 'usersApp:user_prof' post.author.username %}">
-                        
-                        
+
+
                     <p class="obj-click" data-url="{% url 'usersApp:user_prof' post.author.username %}">{{ post.author}}
                     </p>
                     <ul>
@@ -50,7 +53,9 @@
             </div>
 
             {% if post.image %}
-            <img src="{{ post.image.url }}" alt="Post Image" class="post-img" />
+            <a href="{% url 'generalApp:view_post' post.pk %}" class="open_post_link" data-post-id="{{ post.pk }}">
+                <img src="{{ post.image.url }}" alt="Post Image" class="post-img" />
+            </a>
             <!-- <img src="{{ post.image.url }}" alt="Пост изображение"> -->
             {% endif %}
 
@@ -64,7 +69,7 @@
             <div class="post-icons">
                 <div class="post-icons-left">
 
-                    <img class="post-icon img-like" src="{% if user in post.likes.all %}
+                    <img class="post-icon img-like" src="{% if post.id in liked_post_ids %}
                     {% static 'generalApp/icons/heart_red.png' %}
                     {% else %}
                     {% static 'generalApp/icons/heart.png' %}
@@ -81,7 +86,7 @@
                     alt="">
             </div>
             <p class="likes" style="font-size: 13px; font-weight: bold; margin-bottom: 10px;"><span
-                    class="likes-count">{{ post.likes.count|add:350 }} </span> likes</p>
+                    class="likes-count">{{ post.like_set.count|add:350 }} </span> likes</p>
             {% if post.body %}
             <p class="caption" style="font-size: 13px; "><b>{{ post.author}}</b> {{post.body}}</p>
             {%endif%}
@@ -90,7 +95,10 @@
         </div>
 
         {% endfor %}
-
+        {% else %}
+        <img src="{% static 'generalApp/icons/image-gallery.png' %}" alt="" style="height: 4rem;">
+        <p>Start following someone to see their feed.</p>
+        {%endif%}
     </div>
 
 </div>
@@ -117,7 +125,26 @@
     <p style="font-size: 0.8rem; color: var(--light-grey)">
         Suggested For You
     </p>
+    {% for user in users_not_followed_slice%}
     <div class="profile-flex">
+
+        <div class="profile-rec">
+
+            <img src="{{user.userprofile.avatar.url}}" alt="Profile Picture" />
+
+            <div class="profile-rec-info">
+
+                <a href="{% url 'usersApp:user_prof' user.username %}">
+                    <strong>{{user.username}}</strong>
+                </a>
+
+                <span class="profile-rec-info-name">{{ user.userprofile.name }}</span>
+            </div>
+        </div>
+        <div class="switch">Follow</div>
+    </div>
+    {%endfor%}
+    <!-- <div class="profile-flex">
 
         <div class="profile-rec">
 
@@ -131,22 +158,7 @@
             </div>
         </div>
         <div class="switch">Follow</div>
-    </div>
-    <div class="profile-flex">
-
-        <div class="profile-rec">
-
-            <img src="{% static 'generalApp/icons/man62.png' %}" alt="Profile Picture" />
-
-            <div class="profile-rec-info">
-
-                <strong>Username</strong>
-
-                <span class="profile-rec-info-name">Name</span>
-            </div>
-        </div>
-        <div class="switch">Follow</div>
-    </div>
+    </div> -->
     <ul class="profile-rec-list">
         <li>About</li>
         <li>Help</li>
@@ -160,7 +172,7 @@
         <li>English</li>
     </ul>
     <p style="font-size: 0.5rem; color: var(--light-grey)">
-        Meta Verified © 2023 INSTAGRAM FROM META
+        Verified © 2025 GITHUB emberWorm
     </p>
 
 </div>

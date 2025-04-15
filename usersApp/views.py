@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login, logout
 from . import forms, models
-from generalApp.models import Post
+from generalApp.models import Post, Followers
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-
+from django.http import JsonResponse, HttpResponse
 
 def log_in(request):
     form = forms.MyLoginForm(data=request.POST or None)
@@ -43,7 +43,7 @@ def register(request):
 
 # тображение профилей всех юзеров
 @login_required(login_url='users:log_in')
-def jopa(request, username):
+def get_user_profile(request, username):
     user = models.User.objects.get(username=username)
 
     posts_user = Post.objects.filter(author_id=user.id).order_by('-when_added')
@@ -53,9 +53,13 @@ def jopa(request, username):
         is_current_user = True
     else:
         is_current_user = False
+
+    is_follower = Followers.objects.filter(from_user=request.user, to_user=user).exists()
+
     
     context = {
         'is_current_user': is_current_user,
+        'is_follower': is_follower,
         "posts_user":posts_user,
         "post_count":post_count,
         # "profile":user_profile,

@@ -33,8 +33,11 @@
                         Profile</a>
                     <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
                             aria-hidden="true"></i></button>
+                    {% elif is_follower %}
+                    <div data-user-id="{{user.pk}}" id="btn-follow" class="btn profile-edit-btn follow"
+                        style="background-color: rgba(244, 155, 250, 0.98); border: 2px solid #9a77f9;">Unfollow</div>
                     {% else %}
-                    <div class="btn profile-edit-btn follow">Follow</div>
+                    <div data-user-id="{{user.pk}}" id="btn-follow" class="btn profile-edit-btn follow">Follow</div>
                     {% endif %}
                 </div>
 

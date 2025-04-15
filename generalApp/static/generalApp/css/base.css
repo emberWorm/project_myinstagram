@@ -155,12 +155,13 @@ button {
 
 /* search */
 .extra-bar {
-    width: 400px;
+    width: 410px;
     background-color: var(--white);
     border-right: 1px solid var(--link-grey);
     box-shadow: 2px 0px 8px 0px rgba(34, 60, 80, 0.14);
 
     border-radius: 15px;
+
 
     /* visibility: hidden; */
 
@@ -180,17 +181,19 @@ button {
     /* Возвращаем панель в исходное положение (сдвигаем на 0) */
     opacity: 1;
     /* Делаем панель полностью непрозрачной */
+    padding-bottom: 40px;
 }
 
 .extra-container {
-    width: 100%;
+    /* width: 100%; */
     /* Занимает всю ширину extra-bar */
     height: 100%;
     padding: 20px;
     /* Добавляем отступы от краев */
     overflow-y: auto;
     /* Добавляем прокрутку, если контента много */
-    ;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -801,8 +804,8 @@ align-items:
 
 .base-modal-more-content {
     background-color: #fefefe;
-    width: 100px;
-    height: 100px;
+    width: 15vw;
+    height: 7vh;
     margin: 20% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -812,8 +815,8 @@ align-items:
 
 .base-modal-more-content-delete {
     background-color: #fefefe;
-    width: 100px;
-    height: 100px;
+    width: 15vw;
+    height: 13h;
     margin: 20% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -845,6 +848,7 @@ align-items:
 .notification-profile:hover{
     background-color: #e3e3e3;
     cursor: pointer;
+    border-radius: 8px;
 }
 
 .n-avatar {
@@ -884,4 +888,12 @@ align-items:
     /* width: 100%; */
     /* height: 100%; */
     height: 23px;
+}
+
+.reply:hover{
+    cursor: pointer;
+}
+
+.obj-click{
+    cursor: pointer;
 }

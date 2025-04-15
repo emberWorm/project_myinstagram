@@ -49,7 +49,8 @@
             {% endfor %}
             <div>
                 <h4>Username</h4>
-                <p class="change-username">Changing your username will also change your <b>account</b> address.</p>
+                <p class="change-username">Changing your username will also change your <b>account</b> address. It must
+                    be <b>unique</b>.</p>
                 {{form_ed_usr.username}}
             </div>
             <div>
@@ -89,5 +90,16 @@
 
     </div>
 </div>
+
+<script>
+    const uploadButton = document.getElementById('upload-button')
+    uploadButton.addEventListener('click', function () {
+        document.getElementById('image-input').click();
+    });
+    document.getElementById('image-input').addEventListener('change', function () {
+        uploadButton.innerText = 'Photo upload';
+        uploadButton.style.backgroundColor = '#045bac';
+    });
+</script>
 
 {% endblock %}
